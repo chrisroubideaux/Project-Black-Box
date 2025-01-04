@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/cover/Cover.js",
+    "components/cover/Cover.tsx",
     "app/page.tsx" // Fixed placement
   ],
   "exclude": [

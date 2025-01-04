@@ -57,4 +57,46 @@ body {
   animation: tv-static 0.5s steps(20) infinite;
 }
 
+/* */
 
+:root {
+  --font-sixtyfour: "Sixtyfour", serif;
+}
+
+.sixtyfour {
+  font-family: var(--font-sixtyfour);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0,
+    "SCAN" 0;
+}
+/* */
+/* Typewriter Effect */
+@keyframes typing {
+  0% {
+    width: 0;
+    border-right-color: transparent; 
+  }
+  100% {
+    width: 100%;
+    border-right-color: transparent; 
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-right-color: white; 
+  }
+}
+
+.typewriter {
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  overflow: hidden; 
+  white-space: nowrap; 
+  border-right: 4px solid transparent; 
+  animation: typing 2s steps(12) 1s forwards, blink 0.75s step-end infinite;
+}

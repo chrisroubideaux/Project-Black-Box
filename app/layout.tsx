@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Sixtyfour } from "next/font/google";
 import 'animate.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
 import BootstrapClient from "@/utils/BootstrapClient";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const sixtyfourFont = Sixtyfour({
+  variable: "--font-sixtyfour", // Define a custom CSS variable for the font
+  subsets: ["latin"], // Specify the subsets you want (e.g., "latin", "cyrillic", etc.)
+  display: "swap", // Optional: Controls font-display behavior
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Black Box",
@@ -27,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={` ${sixtyfourFont.variable}`}>
         {children}
         <BootstrapClient /> 
       </body>
