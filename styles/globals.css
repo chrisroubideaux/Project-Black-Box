@@ -1,0 +1,60 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #0a0a0a;
+}
+/* */
+@keyframes tv-static {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.static-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.static-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/noise.png');
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  animation: tv-static 0.2s steps(10) infinite;
+}
+
+.static-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.5) 70%);
+  opacity: 0.2;
+  mix-blend-mode: soft-light;
+  animation: tv-static 0.5s steps(20) infinite;
+}
+
+
