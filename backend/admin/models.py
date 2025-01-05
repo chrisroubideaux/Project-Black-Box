@@ -1,8 +1,9 @@
-# admins schema
+# models.py
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
+# Initialize the db instance
 db = SQLAlchemy()
 
 class Admin(db.Model):
