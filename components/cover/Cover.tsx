@@ -99,23 +99,23 @@ const Cover: React.FC = () => {
         <h1 className=" glitch sixtyfour typewriter" data-text="Black Box">
            Black Box
         </h1>
-        <button
-          className=" bg-transparent mt-3"
-          style={{
-            backgroundImage: 'url(/images/cover2.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            height: '100px',
-            width: '100px',
-            border: 'none',
-            cursor: 'pointer',
-          }}
-          aria-label="Custom Image Button"
-          onClick={() => {
-          console.log('Button clicked');
-          }}
-        ></button>
+        <Link
+    href="/menu/"
+    className="image-link bg-transparent mt-3"
+    style={{
+      backgroundImage: 'url(/images/cover2.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '100px',
+      width: '100px',
+      display: 'inline-block',
+      border: 'none',
+      cursor: 'pointer',
+      textDecoration: 'none',
+    }}
+    aria-label="Navigate to Your Target Page"
+  ></Link>
         <div className="w-100 align-center py-3 mt-5 pt-5">
             <p className="nav d-block fs-xs text-center  pb-2 mb-0 ">
               &copy;2025, All rights reserved.

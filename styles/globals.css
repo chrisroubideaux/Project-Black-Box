@@ -136,12 +136,26 @@ body {
   animation: typing 2s steps(12) 1s forwards, blink 0.75s step-end infinite;
 }
 
-
-
 .social-icons {
   color: #f74e4e;
   font-size: 1.5rem;
   margin-right: 1rem;
 }
 
+/* video player */
+.video-js {
+  background-color: #000; 
+}
+
+.video-player-container::after {
+  content: 'No video loaded';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  z-index: 1;
+}
 

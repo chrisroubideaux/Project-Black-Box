@@ -1,9 +1,13 @@
 // Welcome page
 
+import Menu from '@/components/menu/Menu';
+
 export const page = () => {
   return (
     <div>
-      <h1>Welcome</h1>
+      <Menu />
     </div>
   );
 };
+
+export default page;
