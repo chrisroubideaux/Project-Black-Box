@@ -1,12 +1,10 @@
 // Viedo player component
-// Video player component
-'use client';
 'use client';
 import React, { useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import { FaInstagramSquare, FaYoutubeSquare, FaGithub } from 'react-icons/fa';
-import Link from 'next/link'; // Assuming you're using Next.js
+import Link from 'next/link';
 
 const Menu = () => {
   const videoRef = useRef(null);
