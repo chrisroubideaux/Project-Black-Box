@@ -1,5 +1,7 @@
 // Cover component
 import { useEffect, useRef, useState } from 'react';
+import { FaGithub, FaInstagramSquare,FaYoutubeSquare  } from "react-icons/fa";
+import Link from 'next/link';
 
 const Cover: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -97,7 +99,53 @@ const Cover: React.FC = () => {
         <h1 className=" glitch sixtyfour typewriter" data-text="Black Box">
            Black Box
         </h1>
+        <button
+          className=" bg-transparent mt-3"
+          style={{
+            backgroundImage: 'url(/images/cover2.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: '100px',
+            width: '100px',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+          aria-label="Custom Image Button"
+          onClick={() => {
+          console.log('Button clicked');
+          }}
+        ></button>
+        <div className="w-100 align-center py-3 mt-5 pt-5">
+            <p className="nav d-block fs-xs text-center  pb-2 mb-0 ">
+              &copy;2025, All rights reserved.
+              <Link
+                className="nav-link d-inline-block p-0"
+                href="https://createx.studio/"
+                target="_blank"
+                rel="noopener"
+              >
+                Black Box
+              </Link>
+            </p>
+
+            <div className=" m-2 ">
+              <Link href="#!" className=" me-2">
+                <FaInstagramSquare className="social-icons mt-1" />
+              </Link>
+
+              <Link href="#!" className=" me-2">
+                <FaYoutubeSquare className="social-icons mt-1" />  
+              </Link>
+
+              <Link href="https://github.com/chrisroubideaux/Project-Black-Box" className="me-2">
+                <FaGithub className="social-icons mt-1" />
+              </Link>
+            </div>
+          </div>
       </div>
+
+      
     </div>
   );
 };

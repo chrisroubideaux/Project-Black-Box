@@ -135,3 +135,13 @@ body {
   border-right: 4px solid transparent; 
   animation: typing 2s steps(12) 1s forwards, blink 0.75s step-end infinite;
 }
+
+
+
+.social-icons {
+  color: #f74e4e;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+
