@@ -66,7 +66,7 @@ def create_admin():
     return jsonify(new_admin.to_dict()), 201
 
 # Read Admin by ID
-@admin_blueprint.route('/admin/<int:id>', methods=['GET'])
+@admin_blueprint.route('/admins/<int:id>', methods=['GET'])
 @token_required
 def get_admin(id):
     """Retrieve admin details by ID."""
@@ -86,7 +86,7 @@ def get_all_admins():
     return jsonify([admin.to_dict() for admin in admins]), 200
 
 # Update Admin
-@admin_blueprint.route('/admin/<int:id>', methods=['PUT'])
+@admin_blueprint.route('/admins/<uuid:id>', methods=['PUT']) 
 @token_required
 def update_admin(id):
     """Update admin details."""
@@ -95,17 +95,21 @@ def update_admin(id):
     if not admin:
         return jsonify({"error": "Admin not found"}), 404
 
+    # Update fields
     admin.name = data.get('name', admin.name)
     admin.photo = data.get('photo', admin.photo)
     admin.email = data.get('email', admin.email)
 
+    # Handle password update
     if 'password' in data:
         if not validate_password(data['password']):
             return jsonify({"error": "Password does not meet the required conditions"}), 400
         admin.password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
 
+    # Commit changes to the database
     db.session.commit()
     return jsonify(admin.to_dict()), 200
+
 
 # Delete Admin
 @admin_blueprint.route('/admin/<int:id>', methods=['DELETE'])
