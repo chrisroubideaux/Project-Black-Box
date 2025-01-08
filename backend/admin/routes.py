@@ -119,6 +119,7 @@ def delete_admin(id):
     db.session.commit()
     return jsonify({"message": "Admin deleted successfully"}), 200
 
+
 # Admin Login
 @admin_blueprint.route('/admin/login', methods=['POST'])
 def login_admin():
@@ -133,8 +134,9 @@ def login_admin():
 
     # Generate JWT token
     token = jwt.encode(
-        {'id': admin.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
+        {'id': str(admin.id), 'exp': datetime.utcnow() + timedelta(hours=1)},  # Convert UUID to string
         SECRET_KEY,
         algorithm="HS256"
     )
     return jsonify({"token": token}), 200
+

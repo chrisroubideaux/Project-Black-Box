@@ -1,22 +1,34 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
+# Initialize the db instance
 db = SQLAlchemy()
 
 class Admin(db.Model):
     __tablename__ = 'admins'
-    id = db.Column(db.Integer, primary_key=True)
-    google_id = db.Column(db.String(255), nullable=True)
-    name = db.Column(db.String(255), nullable=False)
+
+    # Define the UUID primary key
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
+    google_id = db.Column(db.String(100), unique=True, nullable=True)
+    name = db.Column(db.String(100), nullable=False)
     photo = db.Column(db.String(255), nullable=True)
-    email = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
 
+    def __init__(self, google_id, name, photo, email, password):
+        self.google_id = google_id
+        self.name = name
+        self.photo = photo
+        self.email = email
+        self.password = password
+
     def to_dict(self):
-        """Convert object to dictionary for serialization."""
         return {
-            "id": self.id,
-            "google_id": self.google_id,
+            "id": str(self.id),  # Ensure the 'id' is returned as a string
+            "googleId": self.google_id,
             "name": self.name,
             "photo": self.photo,
-            "email": self.email
+            "email": self.email,
+            # "password": self.password  # Exclude password when sending data back
         }
