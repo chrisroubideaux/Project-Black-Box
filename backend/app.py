@@ -1,8 +1,12 @@
+# app.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from admin.models import db
+from user.models import db
 from admin.routes import admin_blueprint
+from user.routes import user_blueprint
+# dontenv
 from dotenv import load_dotenv
 import os
 
@@ -22,6 +26,7 @@ bcrypt = Bcrypt(app)
 
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
+app.register_blueprint(user_blueprint, url_prefix='/user')
 
 @app.route('/')
 def hello():
@@ -30,5 +35,5 @@ def hello():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Create database tables
+        db.create_all()  
     app.run(debug=True)

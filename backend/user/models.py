@@ -1,4 +1,3 @@
-# backend/admin/models.py
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
@@ -6,8 +5,8 @@ import uuid
 # Initialize the db instance
 db = SQLAlchemy()
 
-class Admin(db.Model):
-    __tablename__ = 'admins'
+class User(db.Model):
+    __tablename__ = 'users'
 
     # Define the UUID primary key
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
@@ -26,10 +25,10 @@ class Admin(db.Model):
 
     def to_dict(self):
         return {
-            "id": str(self.id), 
+            "id": str(self.id),
             "googleId": self.google_id,
             "name": self.name,
             "photo": self.photo,
             "email": self.email,
-            # "password": self.password  # Exclude password when sending data back
+            # Exclude password when sending data back
         }
