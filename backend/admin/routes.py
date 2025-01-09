@@ -3,10 +3,12 @@ from flask import Blueprint, request, jsonify
 from flask_bcrypt import Bcrypt
 import re
 import jwt
-from .models import db, Admin 
+from extensions import db  # Import shared db instance
+from admin.models import Admin  # Import Admin model
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
+from functools import wraps
 
 # Load environment variables
 load_dotenv()
@@ -31,7 +33,6 @@ def validate_password(password):
 # Middleware to require JWT token
 def token_required(f):
     """Verify and decode JWT token."""
-    from functools import wraps
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.headers.get('x-access-token')
@@ -66,28 +67,8 @@ def create_admin():
     db.session.commit()
     return jsonify(new_admin.to_dict()), 201
 
-# Read Admin by ID
-@admin_blueprint.route('/admins/<int:id>', methods=['GET'])
-@token_required
-def get_admin(id):
-    """Retrieve admin details by ID."""
-    admin = Admin.query.get(id)
-    if not admin:
-        return jsonify({"error": "Admin not found"}), 404
-    return jsonify(admin.to_dict()), 200
-
-# Get all admins
-@admin_blueprint.route('/admins', methods=['GET'])
-@token_required
-def get_all_admins():
-    """Retrieve all admin users."""
-    admins = Admin.query.all()
-    if not admins:
-        return jsonify({"error": "No admins found"}), 404
-    return jsonify([admin.to_dict() for admin in admins]), 200
-
 # Update Admin
-@admin_blueprint.route('/admins/<uuid:id>', methods=['PUT']) 
+@admin_blueprint.route('/admins/<uuid:id>', methods=['PUT'])
 @token_required
 def update_admin(id):
     """Update admin details."""
@@ -111,18 +92,6 @@ def update_admin(id):
     db.session.commit()
     return jsonify(admin.to_dict()), 200
 
-@admin_blueprint.route('/admin/<uuid:id>', methods=['DELETE'])
-@token_required
-def delete_admin(id):
-    """Delete an admin user."""
-    admin = Admin.query.get(id)
-    if not admin:
-        return jsonify({"error": "Admin not found"}), 404
-    db.session.delete(admin)
-    db.session.commit()
-    return jsonify({"message": "Admin deleted successfully"}), 200
-
-
 # Admin Login
 @admin_blueprint.route('/admin/login', methods=['POST'])
 def login_admin():
@@ -137,7 +106,7 @@ def login_admin():
 
     # Generate JWT token
     token = jwt.encode(
-        {'id': str(admin.id), 'exp': datetime.utcnow() + timedelta(hours=1)},  # Convert UUID to string
+        {'id': str(admin.id), 'exp': datetime.utcnow() + timedelta(hours=1)},
         SECRET_KEY,
         algorithm="HS256"
     )
@@ -147,4 +116,5 @@ def login_admin():
 @admin_blueprint.route('/admins/logout', methods=['POST'])
 @token_required
 def logout_admin():
+    """Logout admin."""
     return jsonify({"message": "Admin logged out successfully"}), 200

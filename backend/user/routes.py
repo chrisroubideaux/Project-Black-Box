@@ -3,7 +3,8 @@ from flask import Blueprint, request, jsonify
 from flask_bcrypt import Bcrypt
 import re
 import jwt
-from .models import db, User 
+from extensions import db  # Import shared db instance
+from .models import User
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
@@ -82,8 +83,6 @@ def get_user(id):
 def get_all_users():
     """Retrieve all users."""
     users = User.query.all()
-    if not users:
-        return jsonify({"error": "No users found"}), 404
     return jsonify([user.to_dict() for user in users]), 200
 
 # Update User
@@ -144,6 +143,7 @@ def login_user():
 
 # User Logout
 @user_blueprint.route('/user/logout', methods=['POST'])
-@token_required      
-def logout_user():                          
+@token_required
+def logout_user():
+    """Logout user."""
     return jsonify({"message": "User logged out successfully"}), 200

@@ -1,9 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
-
-# Initialize the db instance
-db = SQLAlchemy()
+from extensions import db  # Import shared db instance
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -16,7 +13,7 @@ class User(db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
 
-    def __init__(self, google_id, name, photo, email, password):
+    def __init__(self, google_id=None, name=None, photo=None, email=None, password=None):
         self.google_id = google_id
         self.name = name
         self.photo = photo
@@ -30,5 +27,4 @@ class User(db.Model):
             "name": self.name,
             "photo": self.photo,
             "email": self.email,
-            # Exclude password when sending data back
         }

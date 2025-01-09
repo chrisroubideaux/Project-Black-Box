@@ -1,14 +1,10 @@
 # app.py
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from admin.models import db
-from admin.routes import admin_blueprint
-from user.models import db
-from user.routes import user_blueprint
-# dontenv
 from dotenv import load_dotenv
 import os
+from extensions import db, bcrypt
+from admin.routes import admin_blueprint
+from user.routes import user_blueprint
 
 # Load environment variables
 load_dotenv()
@@ -22,7 +18,7 @@ app.secret_key = os.getenv('DB_SECRET_KEY')
 
 # Initialize extensions
 db.init_app(app)
-bcrypt = Bcrypt(app)
+bcrypt.init_app(app)
 
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')

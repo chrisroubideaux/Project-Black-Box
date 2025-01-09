@@ -1,10 +1,7 @@
 # backend/admin/models.py
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
-
-# Initialize the db instance
-db = SQLAlchemy()
+from extensions import db  # Import shared db instance
 
 class Admin(db.Model):
     __tablename__ = 'admins'
@@ -26,7 +23,7 @@ class Admin(db.Model):
 
     def to_dict(self):
         return {
-            "id": str(self.id), 
+            "id": str(self.id),
             "googleId": self.google_id,
             "name": self.name,
             "photo": self.photo,
