@@ -97,7 +97,7 @@ const Cover: React.FC = () => {
         className="glitch-container"
       >
         <h1 className=" glitch sixtyfour typewriter" data-text="Black Box">
-           Black Boxs
+           Black Box
         </h1>
         <Link
     href="/menu/"
