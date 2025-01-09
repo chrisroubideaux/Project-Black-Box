@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_bcrypt import Bcrypt
 import re
 import jwt
-from .models import db, User  # Import User model
+from .models import db, User 
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
@@ -141,3 +141,9 @@ def login_user():
         algorithm="HS256"
     )
     return jsonify({"token": token}), 200
+
+# User Logout
+@user_blueprint.route('/user/logout', methods=['POST'])
+@token_required      
+def logout_user():                          
+    return jsonify({"message": "User logged out successfully"}), 200

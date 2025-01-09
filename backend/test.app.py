@@ -2,9 +2,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from admin.models import db
+#from admin.models import db
 from admin.routes import admin_blueprint
-from user.models import db
+#from user.models import db
 from user.routes import user_blueprint
 # dontenv
 from dotenv import load_dotenv
@@ -21,7 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv('DB_SECRET_KEY')
 
 # Initialize extensions
-db.init_app(app)
+#db.init_app(app)
 bcrypt = Bcrypt(app)
 
 # Register blueprints

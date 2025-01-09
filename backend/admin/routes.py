@@ -111,9 +111,7 @@ def update_admin(id):
     db.session.commit()
     return jsonify(admin.to_dict()), 200
 
-
-# Delete Admin
-@admin_blueprint.route('/admin/<int:id>', methods=['DELETE'])
+@admin_blueprint.route('/admin/<uuid:id>', methods=['DELETE'])
 @token_required
 def delete_admin(id):
     """Delete an admin user."""
@@ -145,3 +143,8 @@ def login_admin():
     )
     return jsonify({"token": token}), 200
 
+# Admin Logout
+@admin_blueprint.route('/admins/logout', methods=['POST'])
+@token_required
+def logout_admin():
+    return jsonify({"message": "Admin logged out successfully"}), 200
