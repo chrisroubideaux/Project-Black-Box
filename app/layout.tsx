@@ -3,6 +3,7 @@ import {  Sixtyfour } from "next/font/google";
 import 'animate.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
+import '@/styles/navbar.css';
 import BootstrapClient from "@/utils/BootstrapClient";
 
 const sixtyfourFont = Sixtyfour({

@@ -65,7 +65,11 @@ const Cover: React.FC = () => {
           width: '100%',
           zIndex: 1,
         }}
-      ></section>
+      >
+
+      
+
+      </section>
 
       {/* Static Canvas */}
       <canvas
@@ -84,7 +88,7 @@ const Cover: React.FC = () => {
         height={dimensions.height}
       ></canvas>
 
-      {/* Centered Text with Static Glitch Effect */}
+   
       <div
         style={{
           position: 'absolute',
@@ -96,7 +100,7 @@ const Cover: React.FC = () => {
         }}
         className="glitch-container"
       >
-        <h1 className=" glitch sixtyfour typewriter" data-text="Black Box">
+         <h1 className=" glitch sixtyfour typewriter text-center" data-text="Black Box">
            Black Box
         </h1>
         <Link

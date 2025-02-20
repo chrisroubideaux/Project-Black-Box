@@ -32,156 +32,171 @@
 # Step 4: Merge audio and video
 
 # Imports
-import torch
-import torch.nn as nn
-import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-from scipy.spatial import ConvexHull
+import sys
 import os
+import yaml
+import imageio
+import numpy as np
+from skimage.transform import resize
+from skimage import img_as_ubyte
+import torch
+from tqdm.auto import tqdm
+from IPython.display import display
+import ipywidgets as widgets
+from tempfile import NamedTemporaryFile
+import ffmpeg
+from shutil import copyfileobj
+import PIL.Image
+import cv2
+import requests
+import skimage.transform
+import warnings
+from base64 import b64encode
+import io  # Added import for io
+from models.generator import OcclusionAwareGenerator  # Make sure this is the correct generator
+from models.keypoint_detector import KeypointDetector
 
-# Keypoint Extraction using Convex Hull
-def extract_keypoints(image):
-  if image is None:
-    raise ValueError("Image is None, cannot extract keypoints.")
-  gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-  corners = cv2.goodFeaturesToTrack(gray, maxCorners=10, qualityLevel=0.01, minDistance=10)
-  if corners is None:
-    raise ValueError("No keypoints detected in the image.")
-  corners = np.intp(corners).reshape(-1, 2)
-  hull = ConvexHull(corners)
-  keypoints = corners[hull.vertices]
-  return keypoints
+# UI Elements for Image and Video Upload
+input_image_widget = widgets.Output()
+upload_input_image_button = widgets.FileUpload(accept='image/*', multiple=False)
 
-# Simple Generator Model with Modifications
-class Generator(nn.Module):
-  def __init__(self):
-    super(Generator, self).__init__()
-    self.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1)
-    self.conv2 = nn.Conv2d(64, 64, kernel_size=3, padding=1)
-    self.conv3 = nn.Conv2d(64, 3, kernel_size=3, padding=1)
-    self.relu = nn.ReLU()
+input_video_widget = widgets.Output()
+upload_input_video_button = widgets.FileUpload(accept='video/*', multiple=False)
 
-  def forward(self, x, kp_diff):
-    # Check the number of dimensions in kp_diff
-    if kp_diff.dim() == 2:
-      kp_diff = kp_diff.unsqueeze(0).unsqueeze(-1).unsqueeze(-1) 
-    elif kp_diff.dim() == 1:
-      kp_diff = kp_diff.unsqueeze(0).unsqueeze(-1).unsqueeze(-1) 
+# Variables to hold uploaded content
+selected_image = None
+selected_video = None
 
-    # Now kp_diff should have shape [batch_size, channels, 1, 1]
-    # Expand to match the size of x
-    kp_diff = kp_diff.expand(-1, x.size(1), x.size(2), x.size(3))
+# Upload Handlers
+def handle_image_upload(change):
+    global selected_image
+    if upload_input_image_button.value:
+        image_info = list(upload_input_image_button.value.values())[0]
+        selected_image = imageio.imread(io.BytesIO(image_info['content']))
+        input_image_widget.clear_output()
+        with input_image_widget:
+            display(PIL.Image.open(io.BytesIO(image_info['content'])))
 
-    # Add kp_diff to x as a modulation
-    x = x + kp_diff
-    x = self.relu(self.conv1(x))
-    x = self.relu(self.conv2(x))
-    x = self.conv3(x)
-    return x
+def handle_video_upload(change):
+    global selected_video
+    if upload_input_video_button.value:
+        video_info = list(upload_input_video_button.value.values())[0]
+        selected_video = imageio.mimread(io.BytesIO(video_info['content']))
+        input_video_widget.clear_output()
+        with input_video_widget:
+            display(widgets.Label("Video uploaded successfully"))
 
-# Normalize Keypoints
-def normalize_keypoints(kp_source, kp_driving):
-  min_points = min(len(kp_source), len(kp_driving))
-  kp_source = kp_source[:min_points]
-  kp_driving = kp_driving[:min_points]
-  if len(kp_source) == 0 or len(kp_driving) == 0:
-    raise ValueError("Keypoints could not be extracted from one or more images.")
-  return kp_driving - kp_source
+upload_input_image_button.observe(handle_image_upload, names='value')
+upload_input_video_button.observe(handle_video_upload, names='value')
 
-# Extract Frames from Video
-def extract_frames_from_video(video_path):
-  if not os.path.exists(video_path):
-    raise FileNotFoundError(f"Video file not found at {video_path}.")
-  cap = cv2.VideoCapture(video_path)
-  frames = []
-  success, frame = cap.read()
-  while success:
-    frames.append(frame)
-    success, frame = cap.read()
-  cap.release()
-  if len(frames) == 0:
-    raise ValueError("No frames could be extracted from the video.")
-  return frames
+# Model Dropdown
+model = widgets.Dropdown(description="Model:", options=['vox', 'vox-adv', 'taichi', 'taichi-adv', 'nemo', 'mgif', 'fashion', 'bair'])
 
-# Save Animation as MP4
-def save_animation_as_mp4(frames, output_path, fps=30):
-  height, width, _ = frames[0].shape
-  fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-  out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
-  for frame in frames:
-    out.write(frame)
-  out.release()
-  print(f"Animation saved to {output_path}")
+# Settings for the animation generation
+relative = widgets.Checkbox(description="Relative keypoint displacement", value=True)
+adapt_movement_scale = widgets.Checkbox(description="Adapt movement scale", value=True)
 
-# Main Animation Function
-def animate(source_image, driving_video_frames, generator):
-    kp_source = extract_keypoints(source_image)
-    frames = []
+# Generate Button to create animation
+generate_button = widgets.Button(description="Generate Animation", button_style='primary')
 
-    for frame in driving_video_frames:
-        if frame is None:
-            print("Warning: A frame in the driving video is None. Skipping...")
-            continue
-        kp_driving = extract_keypoints(frame)
-        kp_diff = normalize_keypoints(kp_source, kp_driving)
+# Load checkpoints function (from demo.py)
+def load_checkpoints(config_path, checkpoint_path, cpu=False):
+    """Loads the generator and keypoint detector models from checkpoints."""
+    with open(config_path) as f:
+        config = yaml.safe_load(f)
 
-        # Prepare tensors for model input
-        source_tensor = torch.FloatTensor(source_image / 255.0).permute(2, 0, 1).unsqueeze(0)
+    # Change Generator to OcclusionAwareGenerator
+    generator = OcclusionAwareGenerator(**config['model_params']['generator_params'],
+                                        **config['model_params']['common_params'])
+    kp_detector = KeypointDetector(**config['model_params']['kp_detector_params'],
+                                   **config['model_params']['common_params'])
 
-        # Convert kp_diff to PyTorch tensor (ensure it is a float tensor)
-        kp_diff = torch.FloatTensor(kp_diff)  # Convert to float tensor to allow mean operation
+    if not cpu:
+        generator.cuda()
+        kp_detector.cuda()
 
-        # Ensure kp_diff has at least 2 dimensions (channels and keypoint coordinates)
-        if kp_diff.dim() == 1:
-            kp_diff = kp_diff.unsqueeze(0)  # Add a new dimension for channels (batch size of 1)
+    checkpoint = torch.load(checkpoint_path, map_location='cpu' if cpu else None)
+    generator.load_state_dict(checkpoint['generator'])
+    kp_detector.load_state_dict(checkpoint['kp_detector'])
 
-        # Expand kp_diff_tensor to match the size of the input image tensor (3 channels, height, width)
-        kp_diff_tensor = torch.FloatTensor(kp_diff.mean(axis=0)).unsqueeze(0).unsqueeze(-1).unsqueeze(-1)
-        
-        # Expand to match the 3 channels of the input image
-        kp_diff_tensor = kp_diff_tensor.expand(-1, 3, source_tensor.size(2), source_tensor.size(3))
+    generator.eval()
+    kp_detector.eval()
 
-        with torch.no_grad():
-            generated_frame = generator(source_tensor, kp_diff_tensor).squeeze(0).permute(1, 2, 0).numpy()
+    return generator, kp_detector
 
-        generated_frame = (generated_frame * 255).astype(np.uint8)
-        frames.append(generated_frame)
+# Make animation function (from demo.py)
+def make_animation(source_image, driving_video, generator, kp_detector, relative=True, adapt_movement_scale=True, cpu=False):
+    """Generates an animation by transferring motion from a driving video to a source image."""
+    with torch.no_grad():
+        predictions = []
+        source = torch.tensor(source_image[np.newaxis].astype(np.float32)).permute(0, 3, 1, 2)
+        if not cpu:
+            source = source.cuda()
 
-    return frames
+        driving = torch.tensor(np.array(driving_video)[np.newaxis].astype(np.float32)).permute(0, 4, 1, 2, 3)
 
-# Visualization Helper
-def plot_keypoints(image, keypoints, title="Keypoints"):
-  for x, y in keypoints:
-    cv2.circle(image, (x, y), 5, (0, 255, 0), -1)
-  plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-  plt.title(title)
-  plt.axis("off")
-  plt.show()
+        kp_source = kp_detector(source)
+        kp_driving_initial = kp_detector(driving[:, :, 0])
 
-# Main
-if __name__ == "__main__":
-  source_image_path = "/content/drive/MyDrive/project-root-black-box/assets/avatar.png" 
-  driving_video_path = "/content/drive/MyDrive/project-root-black-box/assets/avatar.mp4" 
+        for frame_idx in tqdm(range(driving.shape[2])):
+            driving_frame = driving[:, :, frame_idx]
+            if not cpu:
+                driving_frame = driving_frame.cuda()
 
-  # Load source image
-  if not os.path.exists(source_image_path):
-    raise FileNotFoundError(f"Source image not found at {source_image_path}.")
-  source_image = cv2.imread(source_image_path)
+            kp_driving = kp_detector(driving_frame)
+            kp_norm = normalize_kp(kp_source=kp_source, kp_driving=kp_driving,
+                                   kp_driving_initial=kp_driving_initial, use_relative_movement=relative,
+                                   use_relative_jacobian=relative, adapt_movement_scale=adapt_movement_scale)
 
-  # Extract frames from driving video
-  driving_video_frames = extract_frames_from_video(driving_video_path)
+            out = generator(source, kp_source=kp_source, kp_driving=kp_norm)
+            predictions.append(np.transpose(out['prediction'].data.cpu().numpy(), [0, 2, 3, 1])[0])
 
-  # Plot keypoints for the source image
-  kp_source = extract_keypoints(source_image.copy())
-  plot_keypoints(source_image.copy(), kp_source, title="Source Keypoints")
+    return predictions
 
-  # Initialize Generator
-  generator = Generator()
+# Placeholder for normalize_kp (you should define the actual function or import it)
+def normalize_kp(kp_source, kp_driving, kp_driving_initial, use_relative_movement=True,
+                 use_relative_jacobian=True, adapt_movement_scale=True):
+    return kp_driving  # Placeholder logic for now
 
-  # Animate
-  animated_frames = animate(source_image, driving_video_frames, generator)
+# Handle the animation generation
+def generate_button_click(button):
+    print("Generate button clicked!")  # Debug print
+    if selected_image is None or selected_video is None:
+        print("Please upload both an image and a video.")
+        return
 
-  # Save animation as MP4
-  output_path = "/content/drive/MyDrive/project-root-black-box/assets/avatar.mp4" 
-  save_animation_as_mp4(animated_frames, output_path, fps=30)
+    print("Processing animation...")  # Debug print
+
+    # Load the generator and keypoint detector
+    model_name = model.value
+    checkpoint_path = f'/content/drive/MyDrive/project-root-black-box/checkpoints/{model_name}.pth'
+    config_path = f'/content/drive/MyDrive/project-root-black-box/configs/{model_name}-256.yaml'
+
+    generator, kp_detector = load_checkpoints(config_path, checkpoint_path)
+
+    # Generate animation
+    predictions = make_animation(selected_image, selected_video, generator, kp_detector, relative=relative.value, adapt_movement_scale=adapt_movement_scale.value)
+
+    # Save the animation as a video
+    output_video_path = '/content/drive/MyDrive/project-root-black-box/assets/avatar.mp4'
+    imageio.mimsave(output_video_path, [img_as_ubyte(frame) for frame in predictions], fps=30)
+
+    print(f"Animation saved to {output_video_path}")
+    display(widgets.Label(f"Animation saved to {output_video_path}"))
+
+generate_button.on_click(generate_button_click)
+
+# Layout for the UI
+main = widgets.VBox([
+    widgets.Label('Upload Image:'),
+    widgets.HBox([input_image_widget, upload_input_image_button]),
+    widgets.Label('Upload Video:'),
+    widgets.HBox([input_video_widget, upload_input_video_button]),
+    widgets.Label('Model Selection:'),
+    model,
+    relative,
+    adapt_movement_scale,
+    generate_button
+])
+
+display(main)

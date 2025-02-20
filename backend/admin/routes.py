@@ -3,8 +3,8 @@ from flask import Blueprint, request, jsonify
 from flask_bcrypt import Bcrypt
 import re
 import jwt
-from extensions import db  # Import shared db instance
-from admin.models import Admin  # Import Admin model
+from extensions import db  
+from admin.models import Admin 
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
@@ -67,6 +67,25 @@ def create_admin():
     db.session.commit()
     return jsonify(new_admin.to_dict()), 201
 
+# Get all Admins
+@admin_blueprint.route('/admins', methods=['GET'])
+@token_required
+def get_all_admins():
+    """Retrieve all admins."""
+    admins = Admin.query.all()
+    return jsonify([admin.to_dict() for admin in admins]), 200
+
+# Get Admin by ID
+@admin_blueprint.route('/admins/<uuid:id>', methods=['GET'])
+@token_required
+def get_admin(id):
+    """Retrieve admin details by ID."""
+    admin = Admin.query.get(id)
+    if not admin:
+        return jsonify({"error": "Admin not found"}), 404
+    return jsonify(admin.to_dict()), 200
+
+
 # Update Admin
 @admin_blueprint.route('/admins/<uuid:id>', methods=['PUT'])
 @token_required
@@ -91,6 +110,20 @@ def update_admin(id):
     # Commit changes to the database
     db.session.commit()
     return jsonify(admin.to_dict()), 200
+
+
+# Delete Admin
+@admin_blueprint.route('/admins/<uuid:id>', methods=['DELETE'])
+@token_required
+def delete_admin(id):
+    """Delete an admin."""
+    admin = Admin.query.get(id)
+    if not admin:
+        return jsonify({"error": "Admin not found"}), 404
+    db.session.delete(admin)
+    db.session.commit()
+    return jsonify({"message": "Admin deleted successfully"}), 200
+
 
 # Admin Login
 @admin_blueprint.route('/admin/login', methods=['POST'])
