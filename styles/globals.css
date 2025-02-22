@@ -162,3 +162,14 @@ body {
  height: 100%;
 
 }
+
+h4 {
+  color: #9f9e9e;
+}
+
+/* hr */
+.hr {
+  width: 100%;
+  color: #a9a9a9 ;
+  align-items: center;
+}

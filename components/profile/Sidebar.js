@@ -17,14 +17,11 @@ const Sidebar = () => {
       >
         <Link
           href="/"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+          className=" nav-link d-flex align-items-center mb-3 mb-md-0 me-md-auto "
         >
-          <svg className="bi pe-none me-2" width="40" height="32">
-            <use xlinkHref="#bootstrap" />
-          </svg>
-          <span className="fs-4">Sidebar</span>
+          <h4 className="fs-4">Sidebar</h4>
         </Link>
-        <hr />
+        <hr className="hr" />
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="">
             <Link href="#" className="nav-link " aria-current="page">
@@ -44,12 +41,11 @@ const Sidebar = () => {
               Shorts
             </Link>
           </li>
-          <li>
-            <Link href="#" className="nav-link fs-sm">
-              <FaTv className="fs-6 me-2" />
-              Subs
-            </Link>
-          </li>
+
+          <Link href="#" className="nav-link fs-sm">
+            <FaTv className="fs-6 me-2" />
+            Subs
+          </Link>
         </ul>
         <hr />
         <Link href="#" className="nav-link">
