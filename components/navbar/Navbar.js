@@ -1,6 +1,12 @@
 // Navbar component
 import Image from 'next/image';
-import { FaSearch, FaBars, FaRegHandPeace, FaUser } from 'react-icons/fa';
+import {
+  FaSearch,
+  FaBars,
+  FaRegHandPeace,
+  FaUser,
+  FaBell,
+} from 'react-icons/fa';
 import Link from 'next/link';
 import { FaGear, FaTv } from 'react-icons/fa6';
 
@@ -37,7 +43,12 @@ export const Navbar = () => {
               />
             </div>
           </div>
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto ">
+            <li className="nav-item fs-6">
+              <Link className="nav-link " href="/">
+                <FaBell className="fs-4 " />
+              </Link>
+            </li>
             <li className="nav-item">
               <div className="dropdown ">
                 <a
@@ -56,19 +67,19 @@ export const Navbar = () => {
                 </a>
                 <ul className="dropdown-menu  text-small">
                   <li>
-                    <Link className="dropdown-item" href="/">
+                    <Link className="nav-link" href="/">
                       <FaUser className="fs-6  me-2" />
                       Profile
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="nav-link" href="#">
                       <FaGear className="fs-6  me-2" />
                       Settings
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="nav-link" href="#">
                       <FaTv className="fs-6 me-2" />
                       Watched
                     </Link>
@@ -77,7 +88,7 @@ export const Navbar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="nav-link" href="#">
                       <FaRegHandPeace className="fs-6 me-2" />
                       Log out
                     </Link>

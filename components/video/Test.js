@@ -1,15 +1,8 @@
+// test card component
 // Card component
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  FaThumbsUp,
-  FaCircle,
-  FaEllipsisV,
-  FaList,
-  FaShare,
-  FaReply,
-  FaOutdent,
-} from 'react-icons/fa';
+import { FaThumbsUp, FaCircle, FaEllipsisV } from 'react-icons/fa';
 
 export const Card = () => {
   return (
@@ -55,6 +48,7 @@ export const Card = () => {
           </div>
           <hr className="hr" />
 
+          {/* Video Title & Dropdown Aligned */}
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="card-title mb-0">
               <Link className="nav-link" href="/">
@@ -67,37 +61,24 @@ export const Card = () => {
                 href="#"
                 className=""
                 data-bs-toggle="dropdown"
-                role="button"
                 aria-expanded="false"
               >
                 <FaEllipsisV className="fs-6 text-light" />
               </a>
-              <div
-                className="dropdown-menu dropdown-menu-end"
-                style={{
-                  zIndex: 1050,
-                  maxHeight: 'none',
-                  overflow: 'visible',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                <a href="#" className="nav-link">
-                  <FaOutdent className="fs-6 me-2" />
+              <div className="dropdown-menu dropdown-menu-end ">
+                <a href="#" className="dropdown-item">
                   Add to Queue
                 </a>
-                <a href="#" className="nav-link">
-                  <FaReply className="fs-6 me-2" />
+                <a href="#" className="dropdown-item">
                   Watch Later
                 </a>
-                <a href="#" className="nav-link">
-                  <FaList className="fs-6 me-2" />
+                <a href="#" className="dropdown-item">
                   Save to Playlist
                 </a>
-                <a href="#" className="nav-link">
-                  <FaShare className="fs-6 me-2" />
+                <a href="#" className="dropdown-item">
                   Share
                 </a>
-                <hr className="dropdown-divider" />
+                <hr className="hr" />
                 <a href="#" className="dropdown-item">
                   Not Interested
                 </a>
@@ -108,6 +89,7 @@ export const Card = () => {
             </div>
           </div>
 
+          {/* Category Section */}
           <div className="d-flex justify-content-between align-items-center mt-2">
             <div>
               <Link

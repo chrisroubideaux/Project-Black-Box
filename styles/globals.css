@@ -22,7 +22,6 @@ body {
 }
 
 .glitch {
- 
   font-weight: bold;
   position: relative;
   display: inline-block;
@@ -48,7 +47,6 @@ body {
 .glitch::after {
   text-shadow: 2px 0 red, -2px 0 cyan;
 }
-
 
 /* static effects */
 @keyframes tv-static {
@@ -160,7 +158,6 @@ body {
 
 .layout {
  height: 100%;
-
 }
 
 h4 {

@@ -22,25 +22,21 @@ const Sidebar = () => {
           <h4 className="fs-4">Sidebar</h4>
         </Link>
         <hr className="hr" />
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="">
-            <Link href="#" className="nav-link " aria-current="page">
-              <FaUser className="fs-6  me-2" />
-              Profile
-            </Link>
-          </li>
-          <li className="">
-            <Link href="#" className="nav-link " aria-current="page">
-              <FaHome className="fs-6 me-2" />
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="nav-link ">
-              <FaPlayCircle className="fs-6 me-2" />
-              Shorts
-            </Link>
-          </li>
+        <ul className="nav  flex-column mb-auto">
+          <Link href="#" className="nav-link " aria-current="page">
+            <FaUser className="fs-6  me-2" />
+            Profile
+          </Link>
+
+          <Link href="#" className="nav-link " aria-current="page">
+            <FaHome className="fs-6 me-2" />
+            Home
+          </Link>
+
+          <Link href="#" className="nav-link ">
+            <FaPlayCircle className="fs-6 me-2" />
+            Shorts
+          </Link>
 
           <Link href="#" className="nav-link fs-sm">
             <FaTv className="fs-6 me-2" />
