@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className="sidebar d-flex flex-column flex-shrink-0 p-3 "
+        className="sidebar fixed d-flex flex-column flex-shrink-0 p-3  "
         style={{ width: '180px' }}
       >
         <Link
@@ -23,21 +23,18 @@ const Sidebar = () => {
         </Link>
         <hr className="hr" />
         <ul className="nav  flex-column mb-auto">
-          <Link href="#" className="nav-link " aria-current="page">
+          <Link href="/profile" className="nav-link " aria-current="page">
             <FaUser className="fs-6  me-2" />
             Profile
           </Link>
-
           <Link href="#" className="nav-link " aria-current="page">
             <FaHome className="fs-6 me-2" />
             Home
           </Link>
-
           <Link href="#" className="nav-link ">
             <FaPlayCircle className="fs-6 me-2" />
             Shorts
           </Link>
-
           <Link href="#" className="nav-link fs-sm">
             <FaTv className="fs-6 me-2" />
             Subs
