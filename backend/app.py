@@ -5,6 +5,7 @@ import os
 from extensions import db, bcrypt
 from admin.routes import admin_blueprint
 from user.routes import user_blueprint
+from videos.routes import video_blueprint 
 
 # Load environment variables
 load_dotenv()
@@ -23,11 +24,13 @@ bcrypt.init_app(app)
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 app.register_blueprint(user_blueprint, url_prefix='/user')
+app.register_blueprint(video_blueprint, url_prefix='/videos')
 
 @app.route('/')
 def hello():
     """Returns a simple greeting."""
     return "Hello World!"
+
 
 if __name__ == '__main__':
     with app.app_context():
