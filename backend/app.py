@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask
+from flask_cors import CORS  # Import CORS
 from dotenv import load_dotenv
 import os
 from extensions import db, bcrypt
@@ -11,6 +12,9 @@ from videos.routes import video_blueprint
 load_dotenv()
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Configurations
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"

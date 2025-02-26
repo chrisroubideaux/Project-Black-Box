@@ -11,7 +11,7 @@ import {
   FaOutdent,
 } from 'react-icons/fa';
 
-export const Card = () => {
+export const Card = ({ videos }) => {
   return (
     <div>
       <div className="card p-2 shadow" style={{ width: '400px' }}>
@@ -54,11 +54,10 @@ export const Card = () => {
             </div>
           </div>
           <hr className="hr" />
-
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="card-title mb-0">
               <Link className="nav-link" href="/">
-                Video Title
+                {videos.title}
               </Link>
             </h5>
             {/* Dropdown */}

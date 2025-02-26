@@ -69,7 +69,7 @@ def create_user():
 
 # Read User by ID
 @user_blueprint.route('/users/<uuid:id>', methods=['GET'])
-@token_required
+#token_required
 def get_user(id):
     """Retrieve user details by ID."""
     user = User.query.get(id)
@@ -79,7 +79,7 @@ def get_user(id):
 
 # Get all Users
 @user_blueprint.route('/users', methods=['GET'])
-@token_required
+#@token_required
 def get_all_users():
     """Retrieve all users."""
     users = User.query.all()
@@ -135,7 +135,7 @@ def login_user():
 
     # Generate JWT token
     token = jwt.encode(
-        {'id': str(user.id), 'exp': datetime.utcnow() + timedelta(hours=1)},  # Convert UUID to string
+        {'id': str(user.id), 'exp': datetime.utcnow() + timedelta(hours=1)}, 
         SECRET_KEY,
         algorithm="HS256"
     )

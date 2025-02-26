@@ -12,7 +12,7 @@ export const LikedVideos = () => {
           className="card-img-top"
           alt="course image"
           width={250}
-          height={100}
+          height={50}
         />
         <div className="ribbon mt-3">
           <span>Free</span>
