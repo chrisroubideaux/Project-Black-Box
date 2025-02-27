@@ -11,6 +11,8 @@ class Video(db.Model):
     description = db.Column(db.Text, nullable=True)
     file_url = db.Column(db.String(500), nullable=False)
     thumbnail_url = db.Column(db.String(500), nullable=True)
+    image = db.Column(db.String(500), nullable=True) 
+    cover = db.Column(db.String(500), nullable=True) 
     duration = db.Column(db.Integer, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

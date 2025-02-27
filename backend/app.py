@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask
+from flask_migrate import Migrate
 from flask_cors import CORS  # Import CORS
 from dotenv import load_dotenv
 import os
@@ -7,6 +8,7 @@ from extensions import db, bcrypt
 from admin.routes import admin_blueprint
 from user.routes import user_blueprint
 from videos.routes import video_blueprint 
+
 
 # Load environment variables
 load_dotenv()
@@ -24,11 +26,13 @@ app.secret_key = os.getenv('DB_SECRET_KEY')
 # Initialize extensions
 db.init_app(app)
 bcrypt.init_app(app)
+migrate = Migrate(app, db)
 
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(video_blueprint, url_prefix='/videos')
+
 
 @app.route('/')
 def hello():
