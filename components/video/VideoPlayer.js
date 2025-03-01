@@ -9,9 +9,10 @@ import {
   FaVolumeUp,
   FaVolumeMute,
   FaExpand,
-  FaRegHeart,
-  FaShare,
-  FaBookmark,
+  FaAngleRight,
+  FaClosedCaptioning,
+  FaTable,
+  FaChromecast,
 } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 
@@ -24,7 +25,7 @@ const VideoPlayer = () => {
     if (!videoRef.current) return;
 
     const player = videojs(videoRef.current, {
-      controls: false, // Disabling default controls
+      controls: false,
       autoplay: false,
       preload: 'auto',
       responsive: true,
@@ -74,7 +75,6 @@ const VideoPlayer = () => {
     <div className="pt-5">
       <div className="flex justify-center items-center h-screen">
         <div className="relative">
-          {/* Video Player */}
           <video
             ref={videoRef}
             className="video-js"
@@ -85,8 +85,6 @@ const VideoPlayer = () => {
               borderRadius: '30px',
             }}
           />
-
-          {/* Overlay Controls */}
           <div
             className="absolute bottom-5 left-0 right-0 mx-auto flex flex-col items-center w-full"
             style={{
@@ -98,10 +96,6 @@ const VideoPlayer = () => {
               textAlign: 'center',
             }}
           >
-            {/* Video Title */}
-            <h5 className="text-white font-bold mb-2">Video Title</h5>
-
-            {/* Play, Pause & Volume */}
             <div className="flex justify-center items-center space-x-4 mb-2">
               <button
                 onClick={handlePlayPause}
@@ -117,17 +111,20 @@ const VideoPlayer = () => {
               </button>
             </div>
 
-            {/* Additional Controls */}
             <div className="flex justify-center items-center space-x-4">
               <button className="btn btn-sm bg-transparent text-white">
-                <FaRegHeart size={20} />
+                <FaAngleRight size={20} />
               </button>
               <button className="btn btn-sm bg-transparent text-white">
-                <FaShare size={20} />
+                <FaClosedCaptioning size={20} />
               </button>
               <button className="btn btn-sm bg-transparent text-white">
-                <FaBookmark size={20} />
+                <FaTable size={20} />
               </button>
+              <button className="btn btn-sm bg-transparent text-white">
+                <FaChromecast size={20} />
+              </button>
+
               <button
                 onClick={handleFullScreen}
                 className="btn btn-sm bg-transparent text-white"
@@ -140,6 +137,7 @@ const VideoPlayer = () => {
             </div>
           </div>
         </div>
+        <h5 className="text-white font-bold mb-2">Video Title</h5>
       </div>
     </div>
   );
