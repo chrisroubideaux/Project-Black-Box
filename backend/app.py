@@ -1,14 +1,14 @@
 # app.py
 from flask import Flask
 from flask_migrate import Migrate
-from flask_cors import CORS  # Import CORS
+from flask_cors import CORS  
 from dotenv import load_dotenv
 import os
 from extensions import db, bcrypt
 from admin.routes import admin_blueprint
 from user.routes import user_blueprint
 from videos.routes import video_blueprint 
-
+from user_likes.routes import user_likes_bp 
 
 # Load environment variables
 load_dotenv()
@@ -32,7 +32,7 @@ migrate = Migrate(app, db)
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(video_blueprint, url_prefix='/videos')
-
+app.register_blueprint(user_likes_bp, url_prefix='/user_likes')
 
 @app.route('/')
 def hello():

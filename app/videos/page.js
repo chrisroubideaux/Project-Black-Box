@@ -9,6 +9,7 @@ import Cards from '@/components/video/Cards';
 
 export const Page = () => {
   const [videos, setVideos] = useState([]);
+  const [user, setUser] = useState(null); // Track logged-in user
 
   useEffect(() => {
     axios
@@ -18,6 +19,18 @@ export const Page = () => {
       })
       .catch((error) => {
         console.error('Error fetching videos', error);
+      });
+  }, []);
+
+  // Fetch user data (if logged in)
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/user/users', { withCredentials: true })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch(() => {
+        setUser(null);
       });
   }, []);
 
@@ -42,7 +55,7 @@ export const Page = () => {
                   key={videos.id || `video-${index}`}
                   className=" col-lg-8 col-xxl-9"
                 >
-                  <Cards videos={videos} />
+                  <Cards videos={videos} user={user} />
                 </div>
               ))}
             </div>

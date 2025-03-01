@@ -87,8 +87,6 @@ const Cover: React.FC = () => {
         width={dimensions.width}
         height={dimensions.height}
       ></canvas>
-
-   
       <div
         style={{
           position: 'absolute',
@@ -104,7 +102,7 @@ const Cover: React.FC = () => {
            Black Box
         </h1>
         <Link
-    href="/menu/"
+    href="/videos/"
     className="image-link bg-transparent mt-3"
     style={{
       backgroundImage: 'url(/images/cover2.png)',

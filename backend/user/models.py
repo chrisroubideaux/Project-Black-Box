@@ -1,6 +1,7 @@
+# User model
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from extensions import db  # Import shared db instance
+from extensions import db
 
 class User(db.Model):
     __tablename__ = 'users'

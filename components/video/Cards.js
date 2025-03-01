@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa';
 
 // Update the like count in the backend
-const updateLikeCount = async (videoId) => {
+const updateLikeCount = async (videoId, likeAction) => {
   try {
     const response = await fetch(
       `http://localhost:5000/videos/videos/${videoId}/like`,
@@ -22,6 +22,7 @@ const updateLikeCount = async (videoId) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ likeAction }),
       }
     );
     const data = await response.json();
@@ -38,12 +39,12 @@ export const Cards = ({ videos }) => {
 
   // Handle like button click
   const handleLikeClick = async (videoId) => {
-    if (!liked) {
-      const updatedLikeCount = await updateLikeCount(videoId);
-      if (updatedLikeCount !== null) {
-        setLikeCount(updatedLikeCount);
-        setLiked(true);
-      }
+    const likeAction = liked ? 'unlike' : 'like';
+    const updatedLikeCount = await updateLikeCount(videoId, likeAction);
+
+    if (updatedLikeCount !== null) {
+      setLikeCount(updatedLikeCount);
+      setLiked(!liked);
     }
   };
 
@@ -51,22 +52,24 @@ export const Cards = ({ videos }) => {
     <div>
       <div className="card p-2 shadow" style={{ width: '400px' }}>
         <div className="rounded-top overflow-hidden">
-          <div className="card-overlay-hover">
-            <Image
-              src={videos.cover}
-              className="card-img-top"
-              alt="video"
-              width={400}
-              height={300}
-            />
-          </div>
+          <Link className="card-link" href={`/videos/${videos.id}`}>
+            <div className="card-overlay-hover">
+              <Image
+                src={videos.cover}
+                className="card-img-top"
+                alt="video"
+                width={400}
+                height={300}
+              />
+            </div>
+          </Link>
         </div>
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <ul className="list-inline hstack gap-2 mb-0">
               <FaThumbsUp
-                className={`pt-1 cursor-pointer fs-5 ${
-                  liked ? 'text-green' : 'text-light'
+                className={`pt-1 cursor-pointer ${
+                  liked ? 'text-dark' : 'text-light'
                 }`}
                 onClick={() => handleLikeClick(videos.id)}
               />
@@ -90,6 +93,7 @@ export const Cards = ({ videos }) => {
               />
             </div>
           </div>
+
           <hr className="hr" />
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="card-title mb-0">
@@ -97,7 +101,7 @@ export const Cards = ({ videos }) => {
                 {videos.title}
               </Link>
             </h5>
-            {/* Dropdown */}
+
             <div className="dropdown">
               <a
                 href="#"
@@ -177,7 +181,8 @@ import {
   FaOutdent,
 } from 'react-icons/fa';
 
-const updateLikeCount = async (videoId) => {
+// Update the like count in the backend
+const updateLikeCount = async (videoId, likeAction) => {
   try {
     const response = await fetch(
       `http://localhost:5000/videos/videos/${videoId}/like`,
@@ -186,6 +191,7 @@ const updateLikeCount = async (videoId) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ likeAction }),
       }
     );
     const data = await response.json();
@@ -198,13 +204,16 @@ const updateLikeCount = async (videoId) => {
 
 export const Cards = ({ videos }) => {
   const [likeCount, setLikeCount] = useState(videos.like_count);
+  const [liked, setLiked] = useState(false);
 
   // Handle like button click
-
   const handleLikeClick = async (videoId) => {
-    const updatedLikeCount = await updateLikeCount(videoId);
+    const likeAction = liked ? 'unlike' : 'like';
+    const updatedLikeCount = await updateLikeCount(videoId, likeAction);
+
     if (updatedLikeCount !== null) {
       setLikeCount(updatedLikeCount);
+      setLiked(!liked);
     }
   };
 
@@ -226,14 +235,15 @@ export const Cards = ({ videos }) => {
           <div className="d-flex justify-content-between">
             <ul className="list-inline hstack gap-2 mb-0">
               <FaThumbsUp
-                className="text-light pt-1 cursor-pointer"
+                className={`pt-1 cursor-pointer ${
+                  liked ? 'text-dark' : 'text-light'
+                }`} // Toggle color based on `liked`
                 onClick={() => handleLikeClick(videos.id)}
               />
-
               <li className="list-inline-item d-flex justify-content-center align-items-center">
                 <span className="mt-1">{likeCount}</span>
               </li>
-              <h6 className="pt-3 text-light fw-normal ">Views</h6>
+              <h6 className="pt-3 text-light fw-normal">Views</h6>
               <li className="list-inline-item d-flex justify-content-center align-items-center">
                 <span className="text-light fs-6 mt-1 me-1">
                   {videos.views}
@@ -257,6 +267,7 @@ export const Cards = ({ videos }) => {
                 {videos.title}
               </Link>
             </h5>
+          
             <div className="dropdown">
               <a
                 href="#"
@@ -320,5 +331,6 @@ export const Cards = ({ videos }) => {
 };
 
 export default Cards;
+
 */
 }

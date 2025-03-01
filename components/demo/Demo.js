@@ -29,7 +29,6 @@ const Menu = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
-      {/* Video Player */}
       <video
         ref={videoRef}
         className="video-js"
@@ -40,7 +39,6 @@ const Menu = () => {
         }}
       />
 
-      {/* Footer */}
       <div
         className="pt-5"
         style={{
