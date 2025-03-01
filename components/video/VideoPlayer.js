@@ -15,6 +15,7 @@ import {
   FaChromecast,
 } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
+import { Tab } from './Tab';
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -151,7 +152,7 @@ const VideoPlayer = () => {
           </button>
         </div>
       </div>
-      <h5 className="text-white font-bold mb-2">Video Title</h5>
+      <Tab />
     </div>
   );
 };
