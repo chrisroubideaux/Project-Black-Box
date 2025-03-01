@@ -73,67 +73,85 @@ const VideoPlayer = () => {
 
   return (
     <div className="pt-5">
-      <div className="flex justify-center items-center h-screen">
-        <div className="relative">
-          <video
-            ref={videoRef}
-            className="video-js"
-            style={{
-              width: '700px',
-              height: '65vh',
-              objectFit: 'cover',
-              borderRadius: '30px',
-            }}
-          />
-          <div
-            className="absolute bottom-5 left-0 right-0 mx-auto flex justify-center items-center space-x-4 w-full"
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              padding: '10px',
-              borderRadius: '30px',
-              width: '700px',
-              height: '65vh',
-              textAlign: 'center',
-            }}
+      <div className="relative flex justify-center items-center">
+        <video
+          ref={videoRef}
+          className="video-js"
+          style={{
+            width: '700px',
+            height: '65vh',
+            objectFit: 'cover',
+            borderRadius: '30px',
+          }}
+        />
+        <div
+          className="absolute bottom-3 left-0 right-0 flex justify-center items-center space-x-4 p-3"
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            padding: '10px',
+            borderRadius: '30px',
+            width: '700px',
+            height: '65vh',
+            textAlign: 'center',
+          }}
+        >
+          <button
+            onClick={handlePlayPause}
+            className="btn btn-sm bg-transparent text-white"
           >
-            {/* All icons in a single flex container */}
-            <button
-              onClick={handlePlayPause}
-              className="btn btn-sm bg-transparent text-white"
-            >
-              {playing ? <FaPause size={20} /> : <FaPlay size={20} />}
-            </button>
-            <button
-              onClick={handleMute}
-              className="btn btn-sm bg-transparent text-white"
-            >
-              {muted ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
-            </button>
-            <button className="btn btn-sm bg-transparent text-white">
-              <FaAngleRight size={20} />
-            </button>
-            <button className="btn btn-sm bg-transparent text-white">
-              <FaClosedCaptioning size={20} />
-            </button>
-            <button className="btn btn-sm bg-transparent text-white">
-              <FaTable size={20} />
-            </button>
-            <button className="btn btn-sm bg-transparent text-white">
-              <FaChromecast size={20} />
-            </button>
-            <button
-              onClick={handleFullScreen}
-              className="btn btn-sm bg-transparent text-white"
-            >
-              <FaExpand size={20} />
-            </button>
-            <button className="btn btn-sm bg-transparent text-white">
-              <IoMdSettings size={20} />
-            </button>
-          </div>
+            {playing ? <FaPause size={20} /> : <FaPlay size={20} />}
+          </button>
+          <button
+            onClick={handleMute}
+            className="btn btn-sm bg-transparent text-white"
+          >
+            {muted ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
+          </button>
+
+          <button className="btn btn-sm bg-transparent text-white">
+            <FaAngleRight size={20} />
+          </button>
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Closed Captioning"
+          >
+            <FaClosedCaptioning size={20} />
+          </button>
+
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Mini player"
+          >
+            <FaTable size={20} />
+          </button>
+
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Play on TV"
+          >
+            <FaChromecast size={20} />
+          </button>
+          <button
+            onClick={handleFullScreen}
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Fullscreen"
+          >
+            <FaExpand size={20} />
+          </button>
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Settings"
+          >
+            <IoMdSettings size={20} />
+          </button>
         </div>
-        <h5 className="text-white font-bold mb-2">Video Title</h5>
       </div>
+      <h5 className="text-white font-bold mb-2">Video Title</h5>
     </div>
   );
 };
