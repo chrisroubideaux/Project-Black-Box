@@ -6,9 +6,9 @@ import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
 import Tab from '@/components/profile/Tab';
 import Sidebar from '@/components/profile/Sidebar';
-import History from '@/components/video/History';
-import LikedVideos from '@/components/video/LikedVideos';
-import SavedVideos from '@/components/video/SavedVideos';
+import History from '@/components/video/history/History';
+import LikedVideos from '@/components/video/liked/LikedVideos';
+import SavedVideos from '@/components/video/saved/SavedVideos';
 
 export default function Profile() {
   const { id } = useParams();

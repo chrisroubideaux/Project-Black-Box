@@ -9,7 +9,7 @@ import Cards from '@/components/video/feed/Cards';
 
 export const Page = () => {
   const [videos, setVideos] = useState([]);
-  const [user, setUser] = useState(null); // Track logged-in user
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     axios

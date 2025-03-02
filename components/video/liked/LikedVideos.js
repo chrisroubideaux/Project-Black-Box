@@ -1,33 +1,33 @@
 // Liked videos
 
 import Image from 'next/image';
-import Link from 'next/link';
+//import Link from 'next/link';
 
 export const LikedVideos = () => {
   return (
     <div>
       <div className="card action-trigger-hover " style={{ width: '200px' }}>
-        <Image
-          src=""
-          className="card-img-top"
-          alt="course image"
-          width={250}
-          height={50}
-        />
-        <div className="ribbon mt-3">
-          <span>Free</span>
+        <div className=" position-relative">
+          <Image
+            src="/images/videos/demo.png"
+            className="card-img-top"
+            alt="course image"
+            width={250}
+            height={200}
+          />
+          <span
+            className="position-absolute bottom-0 end-0 bg-dark text-white px-1 rounded"
+            style={{
+              fontSize: '0.75rem',
+              margin: '4px',
+              opacity: 0.8,
+            }}
+          >
+            12:34
+          </span>
         </div>
         <div className="card-body pb-0">
-          <div className="d-flex justify-content-between mb-3">
-            <span className="hstack gap-2">
-              <a href="#" className="badge text-bg-dark">
-                Duration
-              </a>
-            </span>
-            <Link href="#">
-              <i className="far fa-bookmark text-light"></i>
-            </Link>
-          </div>
+          <div className="d-flex justify-content-between mb-3"></div>
           <h5 className="">
             <a
               href="#"
