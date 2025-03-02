@@ -12,7 +12,6 @@ import {
   FaOutdent,
 } from 'react-icons/fa';
 
-// Update the like count in the backend
 const updateLikeCount = async (videoId, likeAction) => {
   try {
     const response = await fetch(

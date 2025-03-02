@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
 import VideoPlayer from '@/components/video/VideoPlayer';
+import Shorts from '@/components/video/Shorts';
 
 export default function Page() {
   const { id } = useParams();
@@ -30,12 +31,18 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <div className="layout h-100">
-        <div className="pt-5 mt-5">
-          <div className="d-flex justify-content-center align-items-center">
-            <div className="row">
-              <div className="col-md-8">
-                <VideoPlayer video={video} />
+      <div className="layout m-1">
+        <div className=" container-fluid">
+          <div className="row pt-5">
+            <div className="col-md-8 pt-5">
+              <VideoPlayer video={video} />
+            </div>
+
+            <div className="col-md-4">
+              <div className="row row-cols-3 g-2 pt-5">
+                <div className="col pt-5">
+                  <Shorts />
+                </div>
               </div>
             </div>
           </div>

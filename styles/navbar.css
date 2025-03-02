@@ -3,7 +3,7 @@
   border-radius: 30px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   background: rgb(0,0,0);
-  background: linear-gradient(142deg, rgba(0,0,0,1) 0%, rgba(53,51,49,1) 49%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(142deg, rgba(0,0,0,1) 0%, rgb(33, 32, 32) 49%, rgba(0,0,0,1) 100%);
   transition: transform 0.5s;
 }
       
@@ -82,8 +82,8 @@ li :hover {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: grey;
-  border: 1px solid #6c6c6c;
+  background-color: #1c1c1c;
+  border: 1px solid #262626;
   border-radius: 30px;
   padding: 6px 12px;
   width: 300px;
@@ -100,8 +100,12 @@ li :hover {
   border: none;
   outline: none; 
   width: 100%;
-  font-size: 14px;
   background: transparent;
+  
+}
+
+.search-input::placeholder {
+  color: #d0d2d2;
 }
 
 .search-input:focus,
@@ -133,11 +137,13 @@ li :hover {
   border-radius: 10px;
   min-width: 150px;
 }
- 
+
+/*
 .dropdown:hover .dropdown-menu {
   display: block;
 }
-  
+*/
+
 .dropdown-menu a {
   display: block;
   padding: 10px;

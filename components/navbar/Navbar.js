@@ -38,7 +38,7 @@ export const Navbar = () => {
               <input
                 type="search"
                 className="form-control search-input"
-                placeholder="Search..."
+                placeholder="Search"
                 aria-label="Search"
               />
             </div>

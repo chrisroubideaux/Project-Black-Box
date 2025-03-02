@@ -9,6 +9,7 @@ import {
   FaReply,
   FaList,
   FaThumbsUp,
+  FaFlag,
 } from 'react-icons/fa';
 
 export const Tab = () => {
@@ -25,8 +26,8 @@ export const Tab = () => {
 
   return (
     <div
-      className="d-flex justify-content-between align-items-center text-white p-3 rounded"
-      style={{ minWidth: '700px' }}
+      className="container d-flex align-items-center "
+      style={{ gap: '400px' }}
     >
       <div className="d-flex align-items-center">
         <Image
@@ -37,14 +38,14 @@ export const Tab = () => {
           height={30}
         />
         <div>
-          <h6 className="mb-0">{artist.name}</h6>
+          <h6 className="mb-0 text-light">{artist.name}</h6>
           <small className="text-light">{artist.views}</small>
         </div>
       </div>
 
       <div className="d-flex align-items-center gap-3">
         <button
-          className="btn btn-sm text-white d-flex align-items-center"
+          className="btn btn-sm text-white d-flex align-items-center "
           onClick={handleLike}
         >
           <FaThumbsUp size={18} className="me-1" /> {likes}
@@ -90,10 +91,9 @@ export const Tab = () => {
               Share
             </a>
             <hr className="dropdown-divider" />
+
             <a href="#" className="dropdown-item">
-              Not Interested
-            </a>
-            <a href="#" className="dropdown-item">
+              <FaFlag className="fs-6 me-2" />
               Report
             </a>
           </div>
