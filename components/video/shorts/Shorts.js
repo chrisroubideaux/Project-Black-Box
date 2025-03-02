@@ -7,6 +7,8 @@ import {
   FaShare,
   FaReply,
   FaOutdent,
+  FaFlag,
+  FaThumbsDown,
 } from 'react-icons/fa';
 
 export default function Shorts() {
@@ -68,9 +70,11 @@ export default function Shorts() {
               </a>
               <hr className="dropdown-divider" />
               <a href="#" className="dropdown-item">
+                <FaThumbsDown className="fs-6 me-2" />
                 Not Interested
               </a>
               <a href="#" className="dropdown-item">
+                <FaFlag className="fs-6 me-2" />
                 Report
               </a>
             </div>

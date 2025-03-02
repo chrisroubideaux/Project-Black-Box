@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
-import VideoPlayer from '@/components/video/VideoPlayer';
-import Shorts from '@/components/video/Shorts';
+import VideoPlayer from '@/components/video/feed/VideoPlayer';
+import Shorts from '@/components/video/shorts/Shorts';
+import Watched from '@/components/video/history/Watched';
 
 export default function Page() {
   const { id } = useParams();
@@ -31,7 +32,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <div className="layout m-1">
+      <div className="layout m-1 h-100">
         <div className=" container-fluid">
           <div className="row pt-5">
             <div className="col-md-8 pt-5">
@@ -42,6 +43,20 @@ export default function Page() {
               <div className="row row-cols-3 g-2 pt-5">
                 <div className="col pt-5">
                   <Shorts />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/** */}
+        <div className=" container-fluid">
+          <div className="row pt-5">
+            <div className="col-md-8 pt-5">Description</div>
+
+            <div className="col-md-4">
+              <div className="row row-cols-3 g-2 pt-5">
+                <div className="col pt-5">
+                  <Watched />
                 </div>
               </div>
             </div>
