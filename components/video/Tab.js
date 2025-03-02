@@ -26,7 +26,7 @@ export const Tab = () => {
 
   return (
     <div
-      className="container d-flex align-items-center "
+      className="container d-flex align-items-center pt-2 "
       style={{ gap: '400px' }}
     >
       <div className="d-flex align-items-center">

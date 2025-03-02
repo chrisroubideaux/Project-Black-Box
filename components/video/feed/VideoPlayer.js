@@ -79,6 +79,7 @@ const VideoPlayer = () => {
           ref={videoRef}
           className="video-js"
           style={{
+            backgroundImage: 'url(/images/videos/demo.png)',
             width: '700px',
             height: '65vh',
             objectFit: 'cover',
@@ -88,7 +89,7 @@ const VideoPlayer = () => {
         <div
           className="absolute bottom-3 left-0 right-0 flex justify-center items-center space-x-4 p-3"
           style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            backgroundImage: 'url(/images/videos/demo.png)',
             padding: '10px',
             borderRadius: '30px',
             width: '700px',
@@ -102,6 +103,7 @@ const VideoPlayer = () => {
           >
             {playing ? <FaPause size={20} /> : <FaPlay size={20} />}
           </button>
+
           <button
             onClick={handleMute}
             className="btn btn-sm bg-transparent text-white"
@@ -171,11 +173,13 @@ import {
   FaVolumeUp,
   FaVolumeMute,
   FaExpand,
-  FaRegHeart,
-  FaShare,
-  FaBookmark,
+  FaAngleRight,
+  FaClosedCaptioning,
+  FaTable,
+  FaChromecast,
 } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
+import { Tab } from '../Tab';
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -186,7 +190,7 @@ const VideoPlayer = () => {
     if (!videoRef.current) return;
 
     const player = videojs(videoRef.current, {
-      controls: true,
+      controls: false,
       autoplay: false,
       preload: 'auto',
       responsive: true,
@@ -233,77 +237,93 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div className="container">
-      <div
-        className="pt-3"
-        style={{ position: 'relative', width: '100%', height: '100vh' }}
-      >
+    <div className="pt-5">
+      <div className="relative flex justify-center items-center">
         <video
           ref={videoRef}
           className="video-js"
           style={{
+            backgroundImage: 'url(/images/videos/demo.png)',
             width: '700px',
             height: '65vh',
             objectFit: 'cover',
             borderRadius: '30px',
           }}
         />
-
         <div
-          className=""
+          className="absolute bottom-3 left-0 right-0 flex justify-center items-center space-x-4 p-3"
           style={{
-            position: 'absolute',
-            width: '100%',
+            backgroundImage: 'url(/images/videos/demo.png)',
+            padding: '10px',
+            borderRadius: '30px',
+            width: '700px',
+            height: '65vh',
             textAlign: 'center',
           }}
         >
-          <h5 className=" font-bold text-white align-middle">Video Title</h5>
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={handlePlayPause}
-              className="btn btn-sm bg-transparent"
-            >
-              {playing ? (
-                <FaPause className="social-icon" />
-              ) : (
-                <FaPlay className="social-icon" />
-              )}
-            </button>
-            <button onClick={handleMute} className="btn btn-sm bg-transparent">
-              {muted ? (
-                <FaVolumeMute className="social-icon" />
-              ) : (
-                <FaVolumeUp className="social-icon" />
-              )}
-            </button>
-          </div>
+          <button
+            onClick={handlePlayPause}
+            className="btn btn-sm bg-transparent text-white"
+          >
+            {playing ? <FaPause size={20} /> : <FaPlay size={20} />}
+          </button>
 
-          <div className="flex items-center space-x-4">
-            <button className="btn btn-sm bg-transparent">
-              <FaRegHeart className="social-icon" />
-            </button>
-            <button className="btn btn-sm bg-transparent">
-              <FaShare className="social-icon" />
-            </button>
-            <button className="btn btn-sm bg-transparent">
-              <FaBookmark className="social-icon" />
-            </button>
-            <button
-              onClick={handleFullScreen}
-              className="btn btn-sm bg-transparent"
-            >
-              <FaExpand className="social-icon" />
-            </button>
-            <button className="btn btn-sm bg-transparent">
-              <IoMdSettings className="social-icon" />
-            </button>
-          </div>
+          <button
+            onClick={handleMute}
+            className="btn btn-sm bg-transparent text-white"
+          >
+            {muted ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
+          </button>
+
+          <button className="btn btn-sm bg-transparent text-white">
+            <FaAngleRight size={20} />
+          </button>
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Closed Captioning"
+          >
+            <FaClosedCaptioning size={20} />
+          </button>
+
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Mini player"
+          >
+            <FaTable size={20} />
+          </button>
+
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Play on TV"
+          >
+            <FaChromecast size={20} />
+          </button>
+          <button
+            onClick={handleFullScreen}
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Fullscreen"
+          >
+            <FaExpand size={20} />
+          </button>
+          <button
+            className="btn btn-sm text-white"
+            data-bs-toggle="tooltip"
+            title="Settings"
+          >
+            <IoMdSettings size={20} />
+          </button>
         </div>
       </div>
+      <Tab />
     </div>
   );
 };
 
 export default VideoPlayer;
+
 */
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
 //import Sidebar from '@/components/profile/Sidebar';
 import Tab from '@/components/profile/Tab';
-import Cards from '@/components/video/Cards';
+import Cards from '@/components/video/feed/Cards';
 
 export const Page = () => {
   const [videos, setVideos] = useState([]);

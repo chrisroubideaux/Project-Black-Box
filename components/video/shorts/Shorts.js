@@ -15,10 +15,10 @@ export default function Shorts() {
   return (
     <>
       <Link className="card-link" href="/">
-        <div className="card p-2 shadow" style={{ width: '200px' }}>
+        <div className="shorts p-2 shadow" style={{ width: '200px' }}>
           <Image
-            src="/shorts.png"
-            className="card-img-top"
+            src="/images/videos/demo.png"
+            className="card-img-top rounded"
             alt="shorts"
             width={200}
             height={300}
