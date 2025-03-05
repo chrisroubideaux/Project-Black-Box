@@ -44,10 +44,7 @@ export default function Profile() {
             <div className="col-lg-8 col-xxl-8">
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">History</h4>
-                <Link
-                  href="/watched/"
-                  className="btn btn-outline-light btn-sm "
-                >
+                <Link href="/watched/" className=" badge btn btn-lg">
                   View All
                 </Link>
               </div>
@@ -56,7 +53,7 @@ export default function Profile() {
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Liked</h4>
-                <Link href="/liked/" className="btn btn-outline-light btn-sm">
+                <Link href="/liked/" className=" badge btn btn-lg">
                   View All
                 </Link>
               </div>
@@ -65,9 +62,9 @@ export default function Profile() {
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Watch Later</h4>
-                <button className="btn btn-outline-light btn-sm">
+                <Link href="/saved/" className=" badge btn btn-lg">
                   View All
-                </button>
+                </Link>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
                 <SavedVideos />
