@@ -56,9 +56,9 @@ export default function Profile() {
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Liked</h4>
-                <button className="btn btn-outline-light btn-sm">
+                <Link href="/liked/" className="btn btn-outline-light btn-sm">
                   View All
-                </button>
+                </Link>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
                 <LikedVideos />
