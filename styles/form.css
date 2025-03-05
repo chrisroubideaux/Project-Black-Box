@@ -36,4 +36,27 @@
 .form-check-input::before {
   display: none;
 }
-  
+/* Custom tooltip background and text */
+.tooltip {
+  --bs-tooltip-bg: rgba(30, 30, 30, 0.9); /* Dark background */
+  --bs-tooltip-color: #fff; /* White text */
+  --bs-tooltip-padding-x: 10px;
+  --bs-tooltip-padding-y: 6px;
+  --bs-tooltip-border-radius: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Modify tooltip arrow */
+.tooltip .tooltip-arrow {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+/* Fade-in effect */
+.tooltip.show {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}

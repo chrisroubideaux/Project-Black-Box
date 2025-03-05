@@ -16,11 +16,21 @@ import {
 } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import { Tab } from '../Tab';
+import { Tooltip } from 'bootstrap';
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+
+  useEffect(() => {
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new Tooltip(tooltipTriggerEl);
+    });
+  }, []);
 
   useEffect(() => {
     if (!videoRef.current) return;
