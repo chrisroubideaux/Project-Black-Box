@@ -6,6 +6,8 @@ import '@/styles/globals.css';
 import '@/styles/navbar.css';
 import '@/styles/sidebar.css';
 import '@/styles/card.css';
+import '@/styles/modals.css';
+import '@/styles/form.css';
 import BootstrapClient from "@/utils/BootstrapClient";
 
 const sixtyfourFont = Sixtyfour({

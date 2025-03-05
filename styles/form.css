@@ -1,0 +1,39 @@
+/* form */
+
+.form-check-input:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}
+  
+.form-check-input {
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  appearance: none; 
+  width: 1.2rem;
+  height: 1.2rem;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+  
+.form-check-input:checked {
+  background-color: white !important;
+  border-color: white !important;
+}
+  
+.form-check-input:checked::before {
+  content: "✔";
+  font-size: 1rem;
+  color: black; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  display: block;
+}
+  
+.form-check-input::before {
+  display: none;
+}
+  

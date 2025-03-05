@@ -52,7 +52,6 @@ li :hover {
   background-color: #fafaf9;
 }
    
-/* Search Form */
 
 .form {
   width: 100%;
@@ -115,7 +114,6 @@ li :hover {
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.25); 
 }
 
-/* User Dropdown */
 .dropdown {
   position: relative;
 }

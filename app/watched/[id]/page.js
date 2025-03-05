@@ -1,17 +1,12 @@
-// Profile page
+// Watched page
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
-import Tab from '@/components/profile/Tab';
+import Tab from '@/components/video/history/Tab';
 import Sidebar from '@/components/profile/Sidebar';
-import History from '@/components/video/history/History';
-import LikedVideos from '@/components/video/liked/LikedVideos';
-import SavedVideos from '@/components/video/saved/SavedVideos';
-
-export default function Profile() {
+export default function Page() {
   const { id } = useParams();
   const [user, setUser] = useState([]);
 
@@ -26,7 +21,6 @@ export default function Profile() {
         console.error('Error fetching user:', error);
       });
   }, [id]);
-
   return (
     <>
       <Navbar />
@@ -44,33 +38,12 @@ export default function Profile() {
             <div className="col-lg-8 col-xxl-8">
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">History</h4>
-                <Link
-                  href="/watched/"
-                  className="btn btn-outline-light btn-sm "
-                >
-                  View All
-                </Link>
-              </div>
-              <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                <History />
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <h4 className="text-light">Liked</h4>
                 <button className="btn btn-outline-light btn-sm">
                   View All
                 </button>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                <LikedVideos />
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <h4 className="text-light">Watch Later</h4>
-                <button className="btn btn-outline-light btn-sm">
-                  View All
-                </button>
-              </div>
-              <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                <SavedVideos />
+                <h1>Testing</h1>
               </div>
             </div>
           </div>

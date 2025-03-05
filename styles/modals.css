@@ -1,0 +1,25 @@
+.modal-body {
+  background: rgb(0,0,0);
+  background: linear-gradient(142deg, rgba(0,0,0,1) 0%, rgba(53,51,49,1) 49%, rgba(0,0,0,1) 100%);
+  border-style: none;
+}
+
+.modal-content {
+  background-color: #101010;
+  border-style: none;
+}
+    
+.offcanvas {
+  background-color: #101010;
+}
+  
+.modal-header {
+  background-color: #101010;
+  border-style: none;
+}
+  
+.modal-footer {
+  background-color: #101010;
+  border-style: none;
+}  
+  

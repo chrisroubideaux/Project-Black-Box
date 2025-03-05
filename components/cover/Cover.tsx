@@ -66,11 +66,7 @@ const Cover: React.FC = () => {
           zIndex: 1,
         }}
       >
-
-      
-
       </section>
-
       {/* Static Canvas */}
       <canvas
         ref={canvasRef}

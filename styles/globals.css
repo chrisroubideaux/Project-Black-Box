@@ -135,7 +135,7 @@ body {
   border-right: 4px solid transparent; 
   animation: typing 2s steps(12) 1s forwards, blink 0.75s step-end infinite;
 }
-
+/* social icons */
 .social-icons {
   color: #f74e4e;
   font-size: 1.5rem;
@@ -159,6 +159,7 @@ body {
   z-index: 1;
 }
 
+/* layout */
 .layout {
  height: 100%;
 }
@@ -176,4 +177,16 @@ h6 {
   width: 100%;
   color: #a9a9a9 ;
   align-items: center;
+}
+
+.btn {
+  color: #f2f0f0;
+  background-color: #9f9e9e;
+  border-radius: 30px;
+}
+
+.btn:hover {  
+  color: #5e5e5e;
+  background-color: #f8f4f4;
+  border-radius: 30px;
 }
