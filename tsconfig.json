@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "components/cover/Cover.tsx",
     "app/page.tsx" // Fixed placement
-  ],
+, "components/cover/Login.js"  ],
   "exclude": [
     "node_modules"
   ]
