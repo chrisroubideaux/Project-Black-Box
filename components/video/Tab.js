@@ -1,6 +1,6 @@
 // Tab component
 import { useState } from 'react';
-//import Link from 'next/link';
+import Link from 'next/link';
 import Image from 'next/image';
 import {
   FaShare,
@@ -50,13 +50,12 @@ export const Tab = () => {
         >
           <FaThumbsUp size={18} className="me-1" /> {likes}
         </button>
-
         <button className="btn btn-sm text-white">
           <FaShare size={18} />
         </button>
 
         <div className="dropdown">
-          <a
+          <Link
             href="#"
             className=""
             data-bs-toggle="dropdown"
@@ -64,7 +63,7 @@ export const Tab = () => {
             aria-expanded="false"
           >
             <FaEllipsisV className="fs-6 text-light" />
-          </a>
+          </Link>
           <div
             className="dropdown-menu dropdown-menu-end"
             style={{
@@ -74,28 +73,28 @@ export const Tab = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <a href="#" className="nav-link">
+            <Link href="#" className="nav-link">
               <FaOutdent className="fs-6 me-2" />
               Add to Queue
-            </a>
-            <a href="#" className="nav-link">
+            </Link>
+            <Link href="#" className="nav-link">
               <FaReply className="fs-6 me-2" />
               Watch Later
-            </a>
-            <a href="#" className="nav-link">
+            </Link>
+            <Link href="#" className="nav-link">
               <FaList className="fs-6 me-2" />
               Save to Playlist
-            </a>
-            <a href="#" className="nav-link">
+            </Link>
+            <Link href="#" className="nav-link">
               <FaShare className="fs-6 me-2" />
               Share
-            </a>
+            </Link>
             <hr className="dropdown-divider" />
 
-            <a href="#" className="dropdown-item">
+            <Link href="#" className="dropdown-item">
               <FaFlag className="fs-6 me-2" />
               Report
-            </a>
+            </Link>
           </div>
         </div>
       </div>

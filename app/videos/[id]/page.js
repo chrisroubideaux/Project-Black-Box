@@ -32,6 +32,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
+
       <div className="layout m-1 h-100">
         <div className=" container-fluid">
           <div className="row pt-5">

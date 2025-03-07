@@ -1,6 +1,6 @@
 // Saved vidoes component
 import Image from 'next/image';
-//import Link from 'next/link';
+import Link from 'next/link';
 
 export const SavedVideos = () => {
   return (
@@ -25,22 +25,21 @@ export const SavedVideos = () => {
             12:34
           </span>
         </div>
-
         <div className="card-body pb-0">
           <h5 className="">
-            <a
+            <Link
               href="#"
               className="nav-link fs-6"
               style={{ fontSize: '0.8rem' }}
             >
               Video Title
-            </a>
+            </Link>
           </h5>
           <h6 className="" style={{ fontSize: '0.8rem' }}>
-            <a href="#" className="nav-link ">
+            <Link href="#" className="nav-link ">
               {' '}
               Name
-            </a>
+            </Link>
           </h6>
           <div className="d-flex justify-content-between mb-2">
             <div className="hstack gap-2">

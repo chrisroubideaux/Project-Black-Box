@@ -53,17 +53,17 @@ export const WatchedCard = () => {
         <div className="col-md-8">
           <div className="card-body pt-4">
             <div className="d-flex justify-content-between align-items-start">
-              <div>
-                <h6 className="card-title mb-1">
+              <div className="pt-4">
+                <h4 className="card-title mb-1">
                   <Link className="nav-link" href="#">
                     Video Title
                   </Link>
-                </h6>
-                <h6 className="card-title mb-0 text-muted">
+                </h4>
+                <h4 className="card-title mb-0 text-muted">
                   <Link className="nav-link" href="#">
                     Artist Name
                   </Link>
-                </h6>
+                </h4>
               </div>
 
               <div className="d-flex align-items-center gap-2">

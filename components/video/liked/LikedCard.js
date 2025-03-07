@@ -37,7 +37,6 @@ export const LikedCard = () => {
               height={100}
               className="img-fluid w-100 h-auto"
             />
-
             <span
               className="position-absolute bottom-0 end-0 bg-dark text-white px-1 rounded"
               style={{
@@ -75,7 +74,7 @@ export const LikedCard = () => {
                   <FaX size={15} />
                 </button>
                 <div className="dropdown">
-                  <a
+                  <Link
                     href="#"
                     className=""
                     data-bs-toggle="dropdown"
@@ -83,7 +82,7 @@ export const LikedCard = () => {
                     aria-expanded="false"
                   >
                     <FaEllipsisV className="fs-6 text-light" />
-                  </a>
+                  </Link>
                   <div
                     className="dropdown-menu dropdown-menu-end"
                     style={{
@@ -93,29 +92,29 @@ export const LikedCard = () => {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    <a href="#" className="nav-link">
+                    <Link href="#" className="nav-link">
                       <FaOutdent className="fs-6 me-2" />
                       Add to Queue
-                    </a>
-                    <a href="#" className="nav-link">
+                    </Link>
+                    <Link href="#" className="nav-link">
                       <FaReply className="fs-6 me-2" />
                       Watch Later
-                    </a>
-                    <a href="#" className="nav-link">
+                    </Link>
+                    <Link href="#" className="nav-link">
                       <FaList className="fs-6 me-2" />
                       Save to Playlist
-                    </a>
-                    <a href="#" className="nav-link">
+                    </Link>
+                    <Link href="#" className="nav-link">
                       <FaShare className="fs-6 me-2" />
                       Share
-                    </a>
+                    </Link>
                     <hr className="dropdown-divider" />
-                    <a href="#" className="dropdown-item">
+                    <Link href="#" className="dropdown-item">
                       Not Interested
-                    </a>
-                    <a href="#" className="dropdown-item">
+                    </Link>
+                    <Link href="#" className="dropdown-item">
                       Report
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

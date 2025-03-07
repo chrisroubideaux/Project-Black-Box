@@ -102,15 +102,14 @@ export const Cards = ({ videos }) => {
             </h5>
 
             <div className="dropdown">
-              <a
-                href="#"
-                className=""
+              <button
+                className="btn btn-sm bg-transparent text-white"
                 data-bs-toggle="dropdown"
                 role="button"
                 aria-expanded="false"
               >
                 <FaEllipsisV className="fs-6 text-light" />
-              </a>
+              </button>
               <div
                 className="dropdown-menu dropdown-menu-end"
                 style={{
@@ -120,29 +119,25 @@ export const Cards = ({ videos }) => {
                   whiteSpace: 'nowrap',
                 }}
               >
-                <a href="#" className="nav-link">
+                <button className="dropdown-item">
                   <FaOutdent className="fs-6 me-2" />
                   Add to Queue
-                </a>
-                <a href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaReply className="fs-6 me-2" />
                   Watch Later
-                </a>
-                <a href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaList className="fs-6 me-2" />
                   Save to Playlist
-                </a>
-                <a href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaShare className="fs-6 me-2" />
                   Share
-                </a>
+                </button>
                 <hr className="dropdown-divider" />
-                <a href="#" className="dropdown-item">
-                  Not Interested
-                </a>
-                <a href="#" className="dropdown-item">
-                  Report
-                </a>
+                <button className="dropdown-item">Not Interested</button>
+                <button className="dropdown-item">Report</button>
               </div>
             </div>
           </div>
@@ -152,7 +147,7 @@ export const Cards = ({ videos }) => {
                 href="#"
                 className="badge bg-info bg-opacity-10 text-info me-2"
               >
-                <i className="fas fa-circle small fw-bold"></i> Category{' '}
+                <i className="fas fa-circle small fw-bold"></i> Category
                 <FaCircle className="small fw-bold" />
               </Link>
             </div>
@@ -180,7 +175,6 @@ import {
   FaOutdent,
 } from 'react-icons/fa';
 
-// Update the like count in the backend
 const updateLikeCount = async (videoId, likeAction) => {
   try {
     const response = await fetch(
@@ -220,15 +214,17 @@ export const Cards = ({ videos }) => {
     <div>
       <div className="card p-2 shadow" style={{ width: '400px' }}>
         <div className="rounded-top overflow-hidden">
-          <div className="card-overlay-hover">
-            <Image
-              src={videos.cover}
-              className="card-img-top"
-              alt="video"
-              width={400}
-              height={300}
-            />
-          </div>
+          <Link className="card-link" href={`/videos/${videos.id}`}>
+            <div className="card-overlay-hover">
+              <Image
+                src={videos.cover}
+                className="card-img-top"
+                alt="video"
+                width={400}
+                height={300}
+              />
+            </div>
+          </Link>
         </div>
         <div className="card-body">
           <div className="d-flex justify-content-between">
@@ -236,7 +232,7 @@ export const Cards = ({ videos }) => {
               <FaThumbsUp
                 className={`pt-1 cursor-pointer ${
                   liked ? 'text-dark' : 'text-light'
-                }`} // Toggle color based on `liked`
+                }`}
                 onClick={() => handleLikeClick(videos.id)}
               />
               <li className="list-inline-item d-flex justify-content-center align-items-center">
@@ -259,6 +255,7 @@ export const Cards = ({ videos }) => {
               />
             </div>
           </div>
+
           <hr className="hr" />
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="card-title mb-0">
@@ -266,9 +263,9 @@ export const Cards = ({ videos }) => {
                 {videos.title}
               </Link>
             </h5>
-          
+
             <div className="dropdown">
-              <a
+              <Link
                 href="#"
                 className=""
                 data-bs-toggle="dropdown"
@@ -276,7 +273,7 @@ export const Cards = ({ videos }) => {
                 aria-expanded="false"
               >
                 <FaEllipsisV className="fs-6 text-light" />
-              </a>
+              </Link>
               <div
                 className="dropdown-menu dropdown-menu-end"
                 style={{
@@ -286,29 +283,29 @@ export const Cards = ({ videos }) => {
                   whiteSpace: 'nowrap',
                 }}
               >
-                <a href="#" className="nav-link">
+                <Link href="#" className="nav-link">
                   <FaOutdent className="fs-6 me-2" />
                   Add to Queue
-                </a>
-                <a href="#" className="nav-link">
+                </Link>
+                <Link href="#" className="nav-link">
                   <FaReply className="fs-6 me-2" />
                   Watch Later
-                </a>
-                <a href="#" className="nav-link">
+                </Link>
+                <Link href="#" className="nav-link">
                   <FaList className="fs-6 me-2" />
                   Save to Playlist
-                </a>
-                <a href="#" className="nav-link">
+                </Link>
+                <Link href="#" className="nav-link">
                   <FaShare className="fs-6 me-2" />
                   Share
-                </a>
+                </Link>
                 <hr className="dropdown-divider" />
-                <a href="#" className="dropdown-item">
+                <Link href="#" className="dropdown-item">
                   Not Interested
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link href="#" className="dropdown-item">
                   Report
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -330,6 +327,5 @@ export const Cards = ({ videos }) => {
 };
 
 export default Cards;
-
 */
 }

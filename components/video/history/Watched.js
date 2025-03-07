@@ -51,15 +51,15 @@ export const Watched = () => {
                 </h6>
               </div>
               <div className="dropdown">
-                <a
+                <button
                   href="#"
-                  className=""
+                  className="btn btn-sm bg-transparent"
                   data-bs-toggle="dropdown"
                   role="button"
                   aria-expanded="false"
                 >
                   <FaEllipsisV className="fs-6 text-light" />
-                </a>
+                </button>
                 <div
                   className="dropdown-menu dropdown-menu-end"
                   style={{
@@ -69,29 +69,29 @@ export const Watched = () => {
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  <a href="#" className="nav-link">
+                  <button type="button" href="#" className="nav-link">
                     <FaOutdent className="fs-6 me-2" />
                     Add to Queue
-                  </a>
-                  <a href="#" className="nav-link">
+                  </button>
+                  <Link href="#" className="nav-link">
                     <FaReply className="fs-6 me-2" />
                     Watch Later
-                  </a>
-                  <a href="#" className="nav-link">
+                  </Link>
+                  <Link href="#" className="nav-link">
                     <FaList className="fs-6 me-2" />
                     Save to Playlist
-                  </a>
-                  <a href="#" className="nav-link">
+                  </Link>
+                  <Link href="#" className="nav-link">
                     <FaShare className="fs-6 me-2" />
                     Share
-                  </a>
+                  </Link>
                   <hr className="dropdown-divider" />
-                  <a href="#" className="dropdown-item">
+                  <Link href="#" className="dropdown-item">
                     Not Interested
-                  </a>
-                  <a href="#" className="dropdown-item">
+                  </Link>
+                  <Link href="#" className="dropdown-item">
                     Report
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

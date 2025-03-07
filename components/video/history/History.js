@@ -1,6 +1,6 @@
 // History card component
 import Image from 'next/image';
-//import Link from 'next/link';
+import Link from 'next/link';
 
 export const History = () => {
   return (
@@ -29,19 +29,19 @@ export const History = () => {
         <div className="card-body ">
           <div className="d-flex justify-content-between mb-3"></div>
           <h6 className="">
-            <a
+            <Link
               href="#"
               className="nav-link fs-6"
               style={{ fontSize: '0.8rem' }}
             >
               Video Title
-            </a>
+            </Link>
           </h6>
           <h6 className="" style={{ fontSize: '0.8rem' }}>
-            <a href="#" className="nav-link ">
+            <Link href="#" className="nav-link ">
               {' '}
               Name
-            </a>
+            </Link>
           </h6>
           <div className="d-flex justify-content-between mb-2">
             <div className="hstack gap-2">

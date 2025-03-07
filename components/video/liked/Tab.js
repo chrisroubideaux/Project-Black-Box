@@ -69,7 +69,6 @@ const Tab = ({}) => {
                     </div>
                   </div>
                 </div>
-
                 <div className="modal-footer bg-transparent">
                   <button
                     type="button"
@@ -78,7 +77,6 @@ const Tab = ({}) => {
                   >
                     Cancel
                   </button>
-
                   <button type="button" className="btn btn-sm badge">
                     Delete liked videos
                   </button>

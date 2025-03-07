@@ -1,13 +1,8 @@
 // Navbar component
 import Image from 'next/image';
-import {
-  FaSearch,
-  FaBars,
-  FaRegHandPeace,
-  FaUser,
-  FaBell,
-} from 'react-icons/fa';
+import { FaSearch, FaBars, FaRegHandPeace, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
+
 import { FaGear, FaTv } from 'react-icons/fa6';
 
 export const Navbar = () => {
@@ -45,13 +40,11 @@ export const Navbar = () => {
           </div>
           <ul className="navbar-nav ms-auto ">
             <li className="nav-item fs-6">
-              <Link className="nav-link " href="/">
-                <FaBell className="fs-4 " />
-              </Link>
+              <Link className="nav-link" href="#"></Link>
             </li>
             <li className="nav-item">
               <div className="dropdown ">
-                <a
+                <Link
                   href="#"
                   className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                   data-bs-toggle="dropdown"
@@ -64,7 +57,7 @@ export const Navbar = () => {
                     height={32}
                     className="rounded-circle"
                   />
-                </a>
+                </Link>
                 <ul className="dropdown-menu  text-small">
                   <li>
                     <Link className="nav-link" href="/">
