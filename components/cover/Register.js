@@ -205,7 +205,8 @@ const Register = () => {
                   width: '100%',
                   borderRadius: '10px',
                   border: 'none',
-                  background: 'linear-gradient(135deg, #ff7eb3, #ff758c)',
+                  background:
+                    'linear-gradient(135deg,rgb(76, 76, 254),rgb(145, 117, 255))',
                   color: '#fff',
                   transition: '0.3s',
                   cursor: 'pointer',
