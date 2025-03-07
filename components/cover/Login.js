@@ -93,11 +93,6 @@ const Login = () => {
         }}
         className="glitch-container"
       >
-        <Link
-          href="/videos/"
-          className="image-link bg-transparent mt-3"
-          aria-label="Navigate to Your Target Page"
-        ></Link>
         <div
           className="container-fluid"
           style={{ minWidth: '400px', minHeight: '400px' }}
@@ -111,7 +106,15 @@ const Login = () => {
               boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <form className="form text-center py-4">
+            <Link
+              href="/videos/"
+              className="image-link bg-transparent mt-3"
+              aria-label="Navigate to Your Target Page"
+            >
+              Go Back
+            </Link>
+            <h5 className="text-white font-bold mb-2">Login</h5>
+            <form className="form text-center">
               <input
                 className="form-control fw-bold "
                 required

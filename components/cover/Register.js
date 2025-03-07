@@ -110,6 +110,7 @@ const Register = () => {
         >
           Go Back
         </Link>
+        {/*
         <ul className="nav justify-content-center list-unstyled d-flex ">
           <ul
             className=" text-light  justify-content-center "
@@ -131,6 +132,7 @@ const Register = () => {
             </li>
           </ul>
         </ul>
+        */}
         <div
           className="container-fluid"
           style={{ minWidth: '400px', maxHeight: '600px' }}
