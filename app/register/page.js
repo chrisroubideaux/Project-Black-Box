@@ -1,11 +1,13 @@
 // Register page
+'use client';
+import Register from '@/components/cover/Register';
 
-export const Register = () => {
+export const page = () => {
   return (
     <div>
-      <h1>Register</h1>
+      <Register />
     </div>
   );
 };
 
-export default Register;
+export default page;
