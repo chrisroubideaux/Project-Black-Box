@@ -9,7 +9,7 @@ import '@/styles/card.css';
 import '@/styles/modals.css';
 import '@/styles/form.css';
 import '@/styles/login.css';
-import  '@/styles/register.css';
+//import  '@/styles/register.css';
 
 import BootstrapClient from "@/utils/BootstrapClient";
 

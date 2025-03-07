@@ -190,3 +190,28 @@ h6 {
   background-color: #f8f4f4;
   border-radius: 30px;
 }
+
+/* tooltip */
+
+.tooltip {
+  --bs-tooltip-bg: rgba(30, 30, 30, 0.9); 
+  --bs-tooltip-color: #fff; 
+  --bs-tooltip-padding-x: 10px;
+  --bs-tooltip-padding-y: 6px;
+  --bs-tooltip-border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+
+.tooltip .tooltip-arrow {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+
+.tooltip.show {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}

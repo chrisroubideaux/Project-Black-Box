@@ -2,10 +2,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
 import Link from 'next/link';
+import { Tooltip } from 'bootstrap';
 
 const Register = () => {
   const canvasRef = useRef(null);
   const [dimensions, setDimensions] = useState(null);
+
+  useEffect(() => {
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new Tooltip(tooltipTriggerEl);
+    });
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -95,9 +105,32 @@ const Register = () => {
       >
         <Link
           href="/videos/"
-          className="image-link bg-transparent mt-3"
+          className="nav-link bg-transparent mt-3"
           aria-label="Navigate to Your Target Page"
-        ></Link>
+        >
+          Go Back
+        </Link>
+        <ul className="nav justify-content-center list-unstyled d-flex ">
+          <ul
+            className=" text-light  justify-content-center "
+            style={{
+              fontSize: '0.85rem',
+              lineHeight: '1.4rem',
+            }}
+          >
+            <li className="text-light">
+              Password at least <strong>10 characters</strong>.
+            </li>
+            <li className="text-light">
+              At least <strong>1 special character</strong> (e.g.,{' '}
+              <code>@</code>, <code>#</code>, <code>$</code>).
+            </li>
+            <li className="text-light">
+              <strong>1 number</strong> (e.g., <code>1</code>, <code>2</code>,{' '}
+              <code>3</code>).
+            </li>
+          </ul>
+        </ul>
         <div
           className="container-fluid"
           style={{ minWidth: '400px', maxHeight: '600px' }}
@@ -111,28 +144,6 @@ const Register = () => {
               boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <ul className="nav justify-content-center list-unstyled d-flex ">
-              <ul
-                className=" text-light  justify-content-center "
-                style={{
-                  fontSize: '0.85rem',
-                  lineHeight: '1.4rem',
-                }}
-              >
-                <li className="text-light">
-                  Password at least <strong>10 characters</strong>.
-                </li>
-                <li className="text-light">
-                  At least <strong>1 special character</strong> (e.g.,{' '}
-                  <code>@</code>, <code>#</code>, <code>$</code>).
-                </li>
-                <li className="text-light">
-                  <strong>1 number</strong> (e.g., <code>1</code>,{' '}
-                  <code>2</code>, <code>3</code>).
-                </li>
-              </ul>
-            </ul>
-
             <form className="form text-center ">
               <input
                 className="form-control fw-bold "
@@ -140,6 +151,8 @@ const Register = () => {
                 type="fullname"
                 name="fullname"
                 placeholder="Enter Full Name"
+                data-bs-toggle="tooltip"
+                title="Full Name"
                 style={{
                   width: '100%',
                   borderRadius: '10px',
@@ -156,6 +169,8 @@ const Register = () => {
                 type="email"
                 name="email"
                 placeholder="Enter Email"
+                data-bs-toggle="tooltip"
+                title="Enter your email"
                 style={{
                   width: '100%',
                   borderRadius: '10px',
@@ -172,6 +187,8 @@ const Register = () => {
                 type="createpassword"
                 name="createpassword"
                 placeholder="Create Password"
+                data-bs-toggle="tooltip"
+                title="Password at least 10 characters with a special character and a number"
                 style={{
                   width: '100%',
                   borderRadius: '10px',
@@ -188,6 +205,8 @@ const Register = () => {
                 type="confirm-password"
                 name="confirm-password"
                 placeholder="Confirm Password"
+                data-bs-toggle="tooltip"
+                title="Confirm Password"
                 style={{
                   width: '100%',
                   borderRadius: '10px',
