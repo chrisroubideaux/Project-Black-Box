@@ -48,7 +48,6 @@ export const Page = () => {
                 */}
               </div>
             </div>
-
             <div className="container">
               {videos.slice(0, 4).map((videos, index) => (
                 <div

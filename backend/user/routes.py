@@ -8,6 +8,7 @@ from .models import User
 from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
+from flask_cors import cross_origin
 
 # Load environment variables
 load_dotenv()
@@ -111,7 +112,7 @@ def update_user(id):
 
 # Delete User
 @user_blueprint.route('/users/<uuid:id>', methods=['DELETE'])
-@token_required
+#@token_required
 def delete_user(id):
     """Delete a user."""
     user = User.query.get(id)
@@ -121,8 +122,9 @@ def delete_user(id):
     db.session.commit()
     return jsonify({"message": "User deleted successfully"}), 200
 
-# User Login
+# Login
 @user_blueprint.route('/user/login', methods=['POST'])
+@cross_origin(origin="http://localhost:3000", supports_credentials=True) 
 def login_user():
     """Authenticate user and return a JWT token."""
     data = request.get_json()
@@ -131,19 +133,36 @@ def login_user():
 
     user = User.query.filter_by(email=email).first()
     if not user or not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "Invalid email or password"}), 401
+        response = jsonify({"error": "Invalid email or password"})
+        response.status_code = 401
+    else:
+        token = jwt.encode(
+            {'id': str(user.id), 'exp': datetime.utcnow() + timedelta(hours=1)}, 
+            SECRET_KEY,
+            algorithm="HS256"
+        )
+        response = jsonify({"token": token})
+        response.status_code = 200
 
-    # Generate JWT token
-    token = jwt.encode(
-        {'id': str(user.id), 'exp': datetime.utcnow() + timedelta(hours=1)}, 
-        SECRET_KEY,
-        algorithm="HS256"
-    )
-    return jsonify({"token": token}), 200
-
-# User Logout
+    return response
 @user_blueprint.route('/user/logout', methods=['POST'])
-@token_required
 def logout_user():
-    """Logout user."""
-    return jsonify({"message": "User logged out successfully"}), 200
+    """Logout user by verifying token before clearing session."""
+    auth_header = request.headers.get('Authorization')
+    if not auth_header:
+        return jsonify({"error": "Token is missing"}), 401
+
+    token = auth_header.split(" ")[1]  # Extract token from "Bearer <token>"
+    try:
+        decoded_token = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return jsonify({"message": "User logged out successfully"}), 200
+    except jwt.ExpiredSignatureError:
+        return jsonify({"error": "Token expired"}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({"error": "Invalid token"}), 401
+# User Logout
+#@user_blueprint.route('/user/logout', methods=['POST'])
+#@token_required
+#def logout_user():
+#    """Logout user."""
+#    return jsonify({"message": "User logged out successfully"}), 200

@@ -1,7 +1,7 @@
 // Watched page
 import Navbar from '@/components/navbar/Navbar';
 import WatchedCard from '@/components/video/history/WatchedCard';
-import Tav from '@/components/video/history/Tab';
+import Tab from '@/components/video/history/Tab';
 
 export default function Page() {
   return (
@@ -17,7 +17,7 @@ export default function Page() {
               <div className="sticky-top pt-5">Sidebar</div>
             </div>
             <div className="col-lg-8 col-xxl-8">
-              <Tav />
+              <Tab />
               <div className="">
                 <WatchedCard />
               </div>

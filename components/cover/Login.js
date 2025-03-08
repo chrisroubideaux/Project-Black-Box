@@ -2,10 +2,75 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
 import Link from 'next/link';
+import axios from 'axios';
 
 const Login = () => {
   const canvasRef = useRef(null);
   const [dimensions, setDimensions] = useState(null);
+  const [error, setError] = useState(null);
+  // Form data
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  // Handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/user/user/login',
+        formData,
+        { withCredentials: true }
+      );
+
+      console.log('API Response:', response.data);
+
+      if (response.status === 200) {
+        const { token } = response.data;
+
+        if (!token) {
+          throw new Error('Token is missing from response.');
+        }
+
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const userId = decodedToken.id;
+
+        if (!userId) {
+          throw new Error('User ID is missing in token.');
+        }
+
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', userId);
+
+        window.location.href = `http://localhost:3000/profile/${userId}`;
+      } else {
+        setError(response.data.error || 'Login failed');
+      }
+    } catch (err) {
+      console.error('Login Error:', err);
+      setError(err.message || 'Internal server error');
+    }
+  };
+
+  // Google OAuth
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:5000/auth/google/login';
+  };
+
+  // Facebook OAuth
+  const handleFacebookLogin = () => {
+    const facebookOAuthURL = 'http://localhost:5000/auth/facebook/login';
+    window.open(facebookOAuthURL, '_self');
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -114,13 +179,15 @@ const Login = () => {
               Go Back
             </Link>
             <h5 className="text-white font-bold mb-2">Login</h5>
-            <form className="form text-center">
+            <form className="form text-center" onSubmit={handleSubmit}>
               <input
                 className="form-control fw-bold "
                 required
                 type="email"
                 name="email"
                 placeholder="Enter Email"
+                value={formData.email}
+                onChange={handleChange}
                 style={{
                   width: '100%',
                   borderRadius: '10px',
@@ -137,6 +204,8 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Enter Password"
+                value={formData.password}
+                onChange={handleChange}
                 style={{
                   width: '100%',
                   borderRadius: '10px',
@@ -174,6 +243,7 @@ const Login = () => {
                       transition: '0.3s',
                       cursor: 'pointer',
                     }}
+                    onClick={handleGoogleLogin}
                   >
                     <FaGoogle
                       className="social-icons m-2"
@@ -191,6 +261,7 @@ const Login = () => {
                       transition: '0.3s',
                       cursor: 'pointer',
                     }}
+                    onClick={handleFacebookLogin}
                   >
                     <FaFacebookSquare
                       className="social-icons m-2"
@@ -199,6 +270,7 @@ const Login = () => {
                   </button>
                 </li>
               </ul>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               <p className="pt-1 fw-bold">{"Don't have an account?"}</p>
               <Link
                 className="btn btn-md w-100 fw-bold"

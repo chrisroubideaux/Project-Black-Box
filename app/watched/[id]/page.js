@@ -21,6 +21,7 @@ export default function Page() {
         console.error('Error fetching user:', error);
       });
   }, [id]);
+
   return (
     <>
       <Navbar />

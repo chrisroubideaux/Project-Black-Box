@@ -12,19 +12,27 @@ import {
 const Sidebar = ({ users }) => {
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/user/users/logout', {
-        method: 'GET',
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        alert('No authentication token found.');
+        return;
+      }
+
+      const response = await fetch('http://localhost:5000/user/user/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         credentials: 'include',
       });
 
       if (response.ok) {
-        const data = await response.json();
         localStorage.removeItem('authToken');
         localStorage.removeItem('userId');
-        window.location.href = data.redirectTo || '/login';
+        window.location.href = '/login';
       } else {
-        const errorData = await response.text();
-        console.error('Logout failed:', errorData);
+        console.error('Logout failed:', await response.text());
         alert('Failed to log out. Please try again.');
       }
     } catch (error) {
@@ -32,6 +40,7 @@ const Sidebar = ({ users }) => {
       alert('An error occurred during logout. Please try again.');
     }
   };
+
   return (
     <>
       <div
