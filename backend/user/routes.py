@@ -49,24 +49,47 @@ def token_required(f):
     return decorated
 
 # Create User
-@user_blueprint.route('/user', methods=['POST'])
+@user_blueprint.route('/user/register', methods=['POST'])
 def create_user():
-    """Create a new user."""
+    """Register a new user and return a JWT token."""
     data = request.get_json()
-    if not validate_password(data['password']):
-        return jsonify({"error": "Password does not meet the required conditions"}), 400
 
+    # Check if email already exists
+    existing_user = User.query.filter_by(email=data['email']).first()
+    if existing_user:
+        return jsonify({"error": "Email already registered"}), 400
+
+    # Check if passwords match
+    if data['password'] != data.get('confirmPassword'):
+        return jsonify({"error": "Passwords do not match"}), 400
+
+    # Validate password strength
+    if not validate_password(data['password']):
+        return jsonify({"error": "Password must be at least 10 characters, include one special character, and one number"}), 400
+
+    # Hash password
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+
+    # Create new user
     new_user = User(
-        google_id=data.get('googleId'),
         name=data['name'],
-        photo=data.get('photo', ''),
+        photo=data.get('photo', ''), 
         email=data['email'],
         password=hashed_password
     )
+
     db.session.add(new_user)
     db.session.commit()
-    return jsonify(new_user.to_dict()), 201
+
+    # Generate JWT Token
+    token = jwt.encode(
+        {'id': str(new_user.id), 'exp': datetime.utcnow() + timedelta(hours=1)},
+        SECRET_KEY,
+        algorithm="HS256"
+    )
+
+    return jsonify({"message": "User registered successfully", "token": token, "user": new_user.to_dict()}), 201
+
 
 # Read User by ID
 @user_blueprint.route('/users/<uuid:id>', methods=['GET'])
@@ -145,6 +168,10 @@ def login_user():
         response.status_code = 200
 
     return response
+from flask import jsonify, request
+import jwt
+
+# Logout
 @user_blueprint.route('/user/logout', methods=['POST'])
 def logout_user():
     """Logout user by verifying token before clearing session."""
@@ -160,9 +187,5 @@ def logout_user():
         return jsonify({"error": "Token expired"}), 401
     except jwt.InvalidTokenError:
         return jsonify({"error": "Invalid token"}), 401
-# User Logout
-#@user_blueprint.route('/user/logout', methods=['POST'])
-#@token_required
-#def logout_user():
-#    """Logout user."""
-#    return jsonify({"message": "User logged out successfully"}), 200
+ 
+

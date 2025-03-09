@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/user/user/login',
+        'http://localhost:5000/user/user/login', // ✅ Make sure this matches Flask
         formData,
         { withCredentials: true }
       );
@@ -41,17 +41,27 @@ const Login = () => {
           throw new Error('Token is missing from response.');
         }
 
-        const decodedToken = JSON.parse(atob(token.split('.')[1]));
-        const userId = decodedToken.id;
+        // Debugging step: Print the token
+        console.log('Received Token:', token);
 
-        if (!userId) {
-          throw new Error('User ID is missing in token.');
-        }
-
+        // Store the token in localStorage
         localStorage.setItem('authToken', token);
-        localStorage.setItem('userId', userId);
 
-        window.location.href = `http://localhost:3000/profile/${userId}`;
+        // Decode the token safely
+        try {
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log('Decoded Token:', decodedToken);
+
+          if (!decodedToken.id) {
+            throw new Error('User ID is missing in token.');
+          }
+
+          localStorage.setItem('userId', decodedToken.id);
+          window.location.href = `http://localhost:3000/profile/${decodedToken.id}`;
+        } catch (decodeError) {
+          console.error('Error decoding token:', decodeError);
+          throw new Error('Invalid token received.');
+        }
       } else {
         setError(response.data.error || 'Login failed');
       }

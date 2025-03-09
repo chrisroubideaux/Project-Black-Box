@@ -13,10 +13,14 @@ const Sidebar = ({ users }) => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('authToken');
+
       if (!token) {
+        console.error('No authentication token found in localStorage.');
         alert('No authentication token found.');
         return;
       }
+
+      console.log('Token before logout:', token); // ✅ Debugging step
 
       const response = await fetch('http://localhost:5000/user/user/logout', {
         method: 'POST',
@@ -27,10 +31,17 @@ const Sidebar = ({ users }) => {
         credentials: 'include',
       });
 
+      console.log('Logout Request Headers:', {
+        Authorization: `Bearer ${token}`,
+      });
+
       if (response.ok) {
+        console.log('Logout successful'); // ✅ Confirm logout
+
         localStorage.removeItem('authToken');
         localStorage.removeItem('userId');
-        window.location.href = '/login';
+
+        window.location.href = 'http://localhost:3000/login';
       } else {
         console.error('Logout failed:', await response.text());
         alert('Failed to log out. Please try again.');

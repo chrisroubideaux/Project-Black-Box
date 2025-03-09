@@ -9,6 +9,25 @@ def users():
 
 
 
+# Create User
+@user_blueprint.route('/user', methods=['POST'])
+def create_user():
+    """Create a new user."""
+    data = request.get_json()
+    if not validate_password(data['password']):
+        return jsonify({"error": "Password does not meet the required conditions"}), 400
+
+    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+    new_user = User(
+        google_id=data.get('googleId'),
+        name=data['name'],
+        photo=data.get('photo', ''),
+        email=data['email'],
+        password=hashed_password
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(new_user.to_dict()), 201
 
 
 # User Login

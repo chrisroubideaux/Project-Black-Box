@@ -1,4 +1,5 @@
 // Register page
+
 'use client';
 import Register from '@/components/cover/Register';
 
