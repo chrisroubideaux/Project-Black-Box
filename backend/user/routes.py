@@ -14,6 +14,7 @@ from flask_cors import cross_origin
 load_dotenv()
 
 bcrypt = Bcrypt()
+
 user_blueprint = Blueprint('user', __name__)
 
 # Use the secret key from .env

@@ -69,7 +69,7 @@ def create_admin():
 
 # Get all Admins
 @admin_blueprint.route('/admins', methods=['GET'])
-@token_required
+#@token_required
 def get_all_admins():
     """Retrieve all admins."""
     admins = Admin.query.all()

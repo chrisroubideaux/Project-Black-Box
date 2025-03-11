@@ -6,7 +6,7 @@ from datetime import datetime
 class Video(db.Model):
     __tablename__ = 'videos'
     
-    id = db.Column(db.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4) 
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
     file_url = db.Column(db.String(500), nullable=False)
@@ -23,5 +23,4 @@ class Video(db.Model):
 
     def __repr__(self):
         return f"<Video {self.title}>"
-
  
