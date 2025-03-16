@@ -1,28 +1,38 @@
 # utils.py
+from flask import request, jsonify
 import jwt
 from functools import wraps
-from flask import request, jsonify
+from user.models import User  # ✅ Correct
+
+from extensions import db  # Ensure correct database reference
 import os
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
-
-# Get secret key from environment variables
 SECRET_KEY = os.getenv('DB_SECRET_KEY')
 
 def token_required(f):
-    """Verify and decode JWT token."""
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.headers.get('x-access-token')
         if not token:
             return jsonify({"error": "Token is missing"}), 401
+
         try:
-            jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            decoded_token = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            user_id = decoded_token.get('id')  # Extract user ID from token
+
+            # Fetch user from DB
+            user = db.session.get(User, user_id)
+
+            if not user:
+                return jsonify({"error": "User not found"}), 401
+
+            # Manually set `current_user`
+            request.current_user = user  
+
         except jwt.ExpiredSignatureError:
             return jsonify({"error": "Token has expired"}), 401
         except jwt.InvalidTokenError:
             return jsonify({"error": "Token is invalid"}), 401
+
         return f(*args, **kwargs)
     return decorated

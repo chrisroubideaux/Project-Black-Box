@@ -4,20 +4,20 @@ from flask_migrate import Migrate
 from flask_cors import CORS  
 from dotenv import load_dotenv
 import os
-#from extensions import db, bcrypt
 from admin.routes import admin_blueprint
 from user.routes import user_blueprint
 from videos.routes import video_blueprint 
 from user_likes.routes import user_likes_bp 
 from history.routes import history_blueprint 
 from extensions import db, bcrypt, login_manager
+from user.models import User  # ✅ Import User model
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 
-# Enable CORS for all routes globally (no need for manual header setting)
+# Enable CORS
 CORS(
     app,
     supports_credentials=True,
@@ -34,9 +34,13 @@ db.init_app(app)
 bcrypt.init_app(app)
 migrate = Migrate(app, db)
 login_manager.init_app(app)
-# Optional: Set the login view if using @login_required
 login_manager.login_view = "user.login"
 login_manager.session_protection = "strong"
+
+# ✅ Fix: Add user_loader function
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)  # ✅ Fetch user by UUID
 
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
@@ -44,7 +48,6 @@ app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(video_blueprint, url_prefix='/videos')
 app.register_blueprint(user_likes_bp, url_prefix='/user_likes')
 app.register_blueprint(history_blueprint, url_prefix='/history')
-
 
 @app.before_request
 def before_request():
@@ -61,7 +64,6 @@ def before_request():
 def hello():
     """Returns a simple greeting."""
     return "Hello World!"
-
 
 if __name__ == '__main__':
     with app.app_context():

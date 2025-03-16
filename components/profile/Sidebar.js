@@ -1,5 +1,107 @@
 // Sidebar component
+import Link from 'next/link';
+import {
+  FaHome,
+  FaPlayCircle,
+  FaTv,
+  FaSignOutAlt,
+  FaUser,
+  FaSignInAlt,
+} from 'react-icons/fa';
 
+const Sidebar = ({ users }) => {
+  const authToken =
+    typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+  const isLoggedIn = users && Object.keys(users).length > 0 && authToken;
+
+  const handleLogout = async () => {
+    try {
+      if (!authToken) {
+        console.error('No authentication token found in localStorage.');
+        alert('No authentication token found.');
+        return;
+      }
+
+      console.log('Token before logout:', authToken);
+
+      const response = await fetch('http://localhost:5000/user/user/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        console.log('Logout successful');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userId');
+        window.location.href = 'http://localhost:3000/login';
+      } else {
+        console.error('Logout failed:', await response.text());
+        alert('Failed to log out. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+      alert('An error occurred during logout. Please try again.');
+    }
+  };
+
+  return (
+    <div className="sidebar d-flex flex-column align-items-center p-3">
+      <Link href="/" className="nav-link text-center mb-3">
+        <h6 className="small">{isLoggedIn ? users?.name : 'Guest'}</h6>
+      </Link>
+      <hr className="w-100 border-light" />
+      <ul className="nav flex-column w-100">
+        <a
+          href={isLoggedIn ? '/profile' : '#'}
+          className="nav-link sidebar-item"
+          onClick={(e) => {
+            if (!isLoggedIn) {
+              e.preventDefault(); // Prevent navigation
+              alert('Please log in to access your profile.');
+            }
+          }}
+        >
+          <FaUser className="icon" />
+          <span>Profile</span>
+        </a>
+        <Link href="/" className="nav-link sidebar-item">
+          <FaHome className="icon" />
+          <span>Home</span>
+        </Link>
+        <Link href="#" className="nav-link sidebar-item">
+          <FaPlayCircle className="icon" />
+          <span>Shorts</span>
+        </Link>
+        <Link href="#" className="nav-link sidebar-item">
+          <FaTv className="icon" />
+          <span>Subs</span>
+        </Link>
+      </ul>
+      ;
+      <hr className="w-100 border-light mt-auto" />
+      {isLoggedIn ? (
+        <Link href="#" className="nav-link sidebar-item" onClick={handleLogout}>
+          <FaSignOutAlt className="icon" />
+          <span>Log out</span>
+        </Link>
+      ) : (
+        <Link href="/login" className="nav-link sidebar-item">
+          <FaSignInAlt className="icon" />
+          <span>Login</span>
+        </Link>
+      )}
+    </div>
+  );
+};
+
+export default Sidebar;
+
+{
+  /*
 import Link from 'next/link';
 import {
   FaHome,
@@ -94,3 +196,5 @@ const Sidebar = ({ users }) => {
 };
 
 export default Sidebar;
+*/
+}

@@ -12,6 +12,7 @@ import {
   FaOutdent,
 } from 'react-icons/fa';
 
+// Function to update like count
 const updateLikeCount = async (videoId, likeAction) => {
   try {
     const response = await fetch(
@@ -32,7 +33,33 @@ const updateLikeCount = async (videoId, likeAction) => {
   }
 };
 
-export const Cards = ({ videos }) => {
+// Function to add video to user's history
+const addToHistory = async (videoId, userId) => {
+  if (!userId) return; // Optionally, handle guest users or show a login prompt
+
+  try {
+    const response = await fetch('http://localhost:5000/history/user/history', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`, // Make sure token exists
+      },
+      body: JSON.stringify({ videoId }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log('History updated:', data.message);
+    } else {
+      console.error('Error adding to history:', data.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+// Main Card component
+export const Cards = ({ videos, userId }) => {
   const [likeCount, setLikeCount] = useState(videos.like_count);
   const [liked, setLiked] = useState(false);
 
@@ -49,16 +76,20 @@ export const Cards = ({ videos }) => {
 
   return (
     <div>
-      <div className="card p-2 shadow" style={{ width: '400px' }}>
+      <div className="card p-2 shadow" style={{ width: '300px' }}>
         <div className="rounded-top overflow-hidden">
-          <Link className="card-link" href={`/videos/${videos.id}`}>
+          <Link
+            className="card-link"
+            href={`/videos/${videos.id}`}
+            onClick={() => addToHistory(userId, videos.id)} // Add to history when clicked
+          >
             <div className="card-overlay-hover">
               <Image
                 src={videos.cover}
                 className="card-img-top"
                 alt="video"
-                width={400}
-                height={300}
+                width={300}
+                height={200}
               />
             </div>
           </Link>
@@ -162,6 +193,7 @@ export default Cards;
 
 {
   /*
+// Card component
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -194,8 +226,30 @@ const updateLikeCount = async (videoId, likeAction) => {
     return null;
   }
 };
+const addToHistory = async (videoId, userId) => {
+  if (!userId) return;
 
-export const Cards = ({ videos }) => {
+  try {
+    const response = await fetch('http://localhost:5000/history/user/history', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ videoId }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log('History updated:', data.message);
+    } else {
+      console.error('Error adding to history:', data.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+export const Cards = ({ videos, userId }) => {
   const [likeCount, setLikeCount] = useState(videos.like_count);
   const [liked, setLiked] = useState(false);
 
@@ -212,16 +266,20 @@ export const Cards = ({ videos }) => {
 
   return (
     <div>
-      <div className="card p-2 shadow" style={{ width: '400px' }}>
+      <div className="card p-2 shadow" style={{ width: '300px' }}>
         <div className="rounded-top overflow-hidden">
-          <Link className="card-link" href={`/videos/${videos.id}`}>
+          <Link
+            className="card-link"
+            href={`/videos/${videos.id}`}
+            onClick={() => addToHistory(userId, videos.id)}
+          >
             <div className="card-overlay-hover">
               <Image
                 src={videos.cover}
                 className="card-img-top"
                 alt="video"
-                width={400}
-                height={300}
+                width={300}
+                height={200}
               />
             </div>
           </Link>
@@ -265,15 +323,14 @@ export const Cards = ({ videos }) => {
             </h5>
 
             <div className="dropdown">
-              <Link
-                href="#"
-                className=""
+              <button
+                className="btn btn-sm bg-transparent text-white"
                 data-bs-toggle="dropdown"
                 role="button"
                 aria-expanded="false"
               >
                 <FaEllipsisV className="fs-6 text-light" />
-              </Link>
+              </button>
               <div
                 className="dropdown-menu dropdown-menu-end"
                 style={{
@@ -283,29 +340,25 @@ export const Cards = ({ videos }) => {
                   whiteSpace: 'nowrap',
                 }}
               >
-                <Link href="#" className="nav-link">
+                <button className="dropdown-item">
                   <FaOutdent className="fs-6 me-2" />
                   Add to Queue
-                </Link>
-                <Link href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaReply className="fs-6 me-2" />
                   Watch Later
-                </Link>
-                <Link href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaList className="fs-6 me-2" />
                   Save to Playlist
-                </Link>
-                <Link href="#" className="nav-link">
+                </button>
+                <button className="dropdown-item">
                   <FaShare className="fs-6 me-2" />
                   Share
-                </Link>
+                </button>
                 <hr className="dropdown-divider" />
-                <Link href="#" className="dropdown-item">
-                  Not Interested
-                </Link>
-                <Link href="#" className="dropdown-item">
-                  Report
-                </Link>
+                <button className="dropdown-item">Not Interested</button>
+                <button className="dropdown-item">Report</button>
               </div>
             </div>
           </div>
@@ -315,7 +368,7 @@ export const Cards = ({ videos }) => {
                 href="#"
                 className="badge bg-info bg-opacity-10 text-info me-2"
               >
-                <i className="fas fa-circle small fw-bold"></i> Category{' '}
+                <i className="fas fa-circle small fw-bold"></i> Category
                 <FaCircle className="small fw-bold" />
               </Link>
             </div>
@@ -327,5 +380,8 @@ export const Cards = ({ videos }) => {
 };
 
 export default Cards;
+
+
+
 */
 }

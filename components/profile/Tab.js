@@ -16,7 +16,7 @@ const Tab = ({}) => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link href="/menu/">Feed</Link>
+                  <Link href="/videos/">Feed</Link>
                 </li>
                 <li
                   className="breadcrumb-item active text-light"

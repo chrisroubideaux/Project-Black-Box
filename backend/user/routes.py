@@ -1,4 +1,5 @@
 # backend/users/routes.py
+# backend/users/routes.py
 from flask import Blueprint, request, jsonify
 from flask_bcrypt import Bcrypt
 import re
@@ -189,4 +190,3 @@ def logout_user():
     except jwt.InvalidTokenError:
         return jsonify({"error": "Invalid token"}), 401
  
-
