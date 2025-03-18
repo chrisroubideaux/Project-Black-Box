@@ -56,11 +56,11 @@ const Sidebar = ({ users }) => {
       <hr className="w-100 border-light" />
       <ul className="nav flex-column w-100">
         <a
-          href={isLoggedIn ? '/profile' : '#'}
+          href={isLoggedIn ? `/profile/${localStorage.getItem('userId')}` : '#'}
           className="nav-link sidebar-item"
           onClick={(e) => {
             if (!isLoggedIn) {
-              e.preventDefault(); // Prevent navigation
+              e.preventDefault();
               alert('Please log in to access your profile.');
             }
           }}

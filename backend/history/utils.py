@@ -2,9 +2,9 @@
 from flask import request, jsonify
 import jwt
 from functools import wraps
-from user.models import User  # ✅ Correct
+from user.models import User 
 
-from extensions import db  # Ensure correct database reference
+from extensions import db  
 import os
 
 SECRET_KEY = os.getenv('DB_SECRET_KEY')
@@ -18,15 +18,15 @@ def token_required(f):
 
         try:
             decoded_token = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            user_id = decoded_token.get('id')  # Extract user ID from token
+            user_id = decoded_token.get('id') 
 
-            # Fetch user from DB
+           
             user = db.session.get(User, user_id)
 
             if not user:
                 return jsonify({"error": "User not found"}), 401
 
-            # Manually set `current_user`
+         
             request.current_user = user  
 
         except jwt.ExpiredSignatureError:

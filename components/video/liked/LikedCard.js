@@ -64,7 +64,6 @@ export const LikedCard = () => {
                   </Link>
                 </h6>
               </div>
-
               <div className="d-flex align-items-center gap-2">
                 <button
                   className="btn btn-sm bg-transparent text-white"

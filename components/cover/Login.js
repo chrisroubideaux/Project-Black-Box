@@ -21,7 +21,8 @@ const Login = () => {
       [name]: value,
     });
   };
-
+  {
+    /*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,6 +43,60 @@ const Login = () => {
         }
 
         // Debugging step: Print the token
+        console.log('Received Token:', token);
+
+        // Store the token in localStorage
+        localStorage.setItem('authToken', token);
+
+        // Decode the token safely
+        try {
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log('Decoded Token:', decodedToken);
+
+          if (!decodedToken.id) {
+            throw new Error('User ID is missing in token.');
+          }
+
+          localStorage.setItem('userId', decodedToken.id);
+          window.location.href = `http://localhost:3000/profile/${decodedToken.id}`;
+        } catch (decodeError) {
+          console.error('Error decoding token:', decodeError);
+          throw new Error('Invalid token received.');
+        }
+      } else {
+        setError(response.data.error || 'Login failed');
+      }
+    } catch (err) {
+      console.error('Login Error:', err);
+      setError(err.message || 'Internal server error');
+    }
+  };
+  */
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/user/user/login',
+        formData,
+        {
+          withCredentials: true, // Make sure credentials are sent
+          headers: {
+            'x-access-token': localStorage.getItem('authToken'), // Make sure this token exists
+          },
+        }
+      );
+
+      console.log('API Response:', response.data);
+
+      if (response.status === 200) {
+        const { token } = response.data;
+
+        if (!token) {
+          throw new Error('Token is missing from response.');
+        }
+
         console.log('Received Token:', token);
 
         // Store the token in localStorage

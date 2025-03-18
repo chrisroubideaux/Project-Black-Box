@@ -6,7 +6,7 @@ import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
 import VideoPlayer from '@/components/video/feed/VideoPlayer';
 import Shorts from '@/components/video/shorts/Shorts';
-import Watched from '@/components/video/history/Watched';
+//import Watched from '@/components/video/history/Watched';
 import Sidebar from '@/components/profile/Sidebar';
 
 export default function Page() {
@@ -48,14 +48,14 @@ export default function Page() {
 
       <div className="container-fluid">
         <div className="pt-5 mt-5">
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <Sidebar users={user} />
             </div>
-            <div class="col-8">
+            <div className="col-8">
               <VideoPlayer video={video} />
             </div>
-            <div class="col">
+            <div className="col">
               <div className="sticky-top pt-5">
                 <Shorts />
               </div>
@@ -67,9 +67,7 @@ export default function Page() {
 
               <div className="col-md-4">
                 <div className="row row-cols-3 g-2 pt-5">
-                  <div className="col pt-5">
-                    <Watched />
-                  </div>
+                  <div className="col pt-5">{/* <Watched /> */}</div>
                 </div>
               </div>
             </div>

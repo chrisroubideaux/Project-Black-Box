@@ -18,10 +18,16 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS
+#CORS(
+#    app,
+#    supports_credentials=True,
+#    origins=["http://localhost:3000"]
+#)
 CORS(
     app,
     supports_credentials=True,
-    origins=["http://localhost:3000"]
+    origins=["http://localhost:3000"],
+    headers=["Content-Type", "x-access-token", "Authorization"]  # <-- Add x-access-token here
 )
 
 # Configurations
@@ -49,16 +55,6 @@ app.register_blueprint(video_blueprint, url_prefix='/videos')
 app.register_blueprint(user_likes_bp, url_prefix='/user_likes')
 app.register_blueprint(history_blueprint, url_prefix='/history')
 
-@app.before_request
-def before_request():
-    """Handle preflight OPTIONS requests"""
-    if request.method == "OPTIONS":
-        response = app.make_response("")
-        response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
-        response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-        response.headers.add("Access-Control-Allow-Credentials", "true")
-        return response
 
 @app.route('/')
 def hello():

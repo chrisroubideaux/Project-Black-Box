@@ -56,7 +56,7 @@ export const Page = () => {
                     key={video.id || `video-${index}`}
                     className="video-card pt-4"
                   >
-                    <Cards videos={video} user={user} />
+                    <Cards videos={video} userId={user?.id} />
                   </div>
                 ))}
               </div>

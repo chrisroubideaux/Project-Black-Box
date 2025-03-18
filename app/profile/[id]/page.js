@@ -14,7 +14,6 @@ import SavedVideos from '@/components/video/saved/SavedVideos';
 export default function Profile() {
   const { id } = useParams();
   const [user, setUser] = useState([]);
-  const [history, setHistory] = useState([]);
 
   // Fetch user data
   useEffect(() => {
@@ -22,16 +21,6 @@ export default function Profile() {
       .get(`http://localhost:5000/user/users/${id}`)
       .then((response) => setUser(response.data))
       .catch((error) => console.error('Error fetching user:', error));
-  }, [id]);
-
-  // Fetch watched history
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/history/user/history`, {
-        params: { user_id: id },
-      })
-      .then((response) => setHistory(response.data))
-      .catch((error) => console.error('Error fetching history:', error));
   }, [id]);
 
   return (
@@ -56,7 +45,8 @@ export default function Profile() {
                 </Link>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                <History videos={history} />
+                <History userId={id} />{' '}
+                {/* Pass userId prop to History component */}
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Liked</h4>

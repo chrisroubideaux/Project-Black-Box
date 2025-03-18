@@ -34,17 +34,21 @@ const updateLikeCount = async (videoId, likeAction) => {
 };
 
 // Function to add video to user's history
-const addToHistory = async (videoId, userId) => {
-  if (!userId) return; // Optionally, handle guest users or show a login prompt
+const addToHistory = async (userId, videoId) => {
+  const token = localStorage.getItem('x_access_token'); // Get token from localStorage
+  if (!token) {
+    console.error('Token not available');
+    return; // Don't make request if no token exists
+  }
 
   try {
     const response = await fetch('http://localhost:5000/history/user/history', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`, // Make sure token exists
+        'x-access-token': token, // Send the token directly here
       },
-      body: JSON.stringify({ videoId }),
+      body: JSON.stringify({ userId, videoId }),
     });
 
     const data = await response.json();
@@ -60,7 +64,7 @@ const addToHistory = async (videoId, userId) => {
 
 // Main Card component
 export const Cards = ({ videos, userId }) => {
-  const [likeCount, setLikeCount] = useState(videos.like_count);
+  const [likeCount, setLikeCount] = useState(videos.like_count || 0);
   const [liked, setLiked] = useState(false);
 
   // Handle like button click
@@ -81,11 +85,15 @@ export const Cards = ({ videos, userId }) => {
           <Link
             className="card-link"
             href={`/videos/${videos.id}`}
-            onClick={() => addToHistory(userId, videos.id)} // Add to history when clicked
+            onMouseDown={() => {
+              if (userId) {
+                addToHistory(userId, videos.id); // Ensure history updates only if userId exists
+              }
+            }}
           >
             <div className="card-overlay-hover">
               <Image
-                src={videos.cover}
+                src={videos.cover || '/default-thumbnail.jpg'} // Use fallback image
                 className="card-img-top"
                 alt="video"
                 width={300}
@@ -116,7 +124,7 @@ export const Cards = ({ videos, userId }) => {
             <div className="avatar avatar-sm">
               <Image
                 className="avatar-img rounded-circle"
-                src="/"
+                src={videos.avatar || '/default-avatar.jpg'} // Use fallback avatar
                 alt="avatar"
                 width={40}
                 height={40}
@@ -127,7 +135,7 @@ export const Cards = ({ videos, userId }) => {
           <hr className="hr" />
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="card-title mb-0">
-              <Link className="nav-link" href="/">
+              <Link className="nav-link" href={`/videos/${videos.id}`}>
                 {videos.title}
               </Link>
             </h5>
