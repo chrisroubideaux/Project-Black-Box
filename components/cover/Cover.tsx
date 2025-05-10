@@ -50,7 +50,7 @@ const Cover: React.FC = () => {
 
   return (
     <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-      {/* Background Section */}
+     
       <section
         style={{
           backgroundImage: 'url(/images/cover.png)',
@@ -67,7 +67,7 @@ const Cover: React.FC = () => {
         }}
       >
       </section>
-      {/* Static Canvas */}
+    
       <canvas
         ref={canvasRef}
         style={{
@@ -115,7 +115,7 @@ const Cover: React.FC = () => {
     aria-label="Navigate to Your Target Page"
   ></Link>
         <div className="w-100 align-center py-3 mt-5 pt-5">
-            <p className="nav d-block fs-xs text-center  pb-2 mb-0 ">
+            <p className="nav d-block fs-xs text-center  pb-2 mb-0 text-white">
               &copy;2025, All rights reserved.
               <Link
                 className="nav-link d-inline-block p-0"

@@ -3,7 +3,6 @@ from flask import request, jsonify
 import jwt
 from functools import wraps
 from user.models import User 
-
 from extensions import db  
 import os
 
@@ -19,13 +18,11 @@ def token_required(f):
         try:
             decoded_token = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
             user_id = decoded_token.get('id') 
-
            
             user = db.session.get(User, user_id)
 
             if not user:
                 return jsonify({"error": "User not found"}), 401
-
          
             request.current_user = user  
 
