@@ -53,7 +53,7 @@ const Menu = () => {
         }}
       >
         <p className="nav d-block fs-xs text-center text-light pb-2 mb-0 ">
-          &copy;2025, All rights reserve.
+          &copy;2025, All rights reserved.
           <Link
             className="text-light nav-link d-inline-block p-0"
             href="/"
