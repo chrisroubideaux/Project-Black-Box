@@ -1,5 +1,4 @@
 # Video model
-# Video model
 from extensions import db
 import uuid
 from datetime import datetime

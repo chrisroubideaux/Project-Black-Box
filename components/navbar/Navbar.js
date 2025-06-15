@@ -32,7 +32,8 @@ export const Navbar = () => {
               <FaSearch className="search-icon" />
               <input
                 type="search"
-                className="form-control search-input"
+                className="form-control search-input w-100"
+                id="searchInput"
                 placeholder="Search"
                 aria-label="Search"
               />

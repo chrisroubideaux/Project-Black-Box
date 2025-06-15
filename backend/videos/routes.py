@@ -1,8 +1,11 @@
 # Video routes
+import os
 from flask import Blueprint, request, jsonify 
 from videos.controllers import get_all_videos, get_video_by_id, increment_video_views
 from videos.models import db, Video
+from werkzeug.utils import secure_filename
 video_blueprint = Blueprint('videos', __name__)
+
     
 # Create a new video
 @video_blueprint.route('/videos', methods=['POST'])
@@ -110,4 +113,3 @@ def delete_video(video_id):
     db.session.commit()
 
     return jsonify({"message": "Video deleted successfully"}), 200
-

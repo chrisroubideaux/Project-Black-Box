@@ -1,7 +1,8 @@
 # User model
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, BYTEA
 import uuid
 from extensions import db
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -13,6 +14,7 @@ class User(db.Model):
     photo = db.Column(db.String(255), nullable=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    face_embedding = db.Column(BYTEA, nullable=True)
 
     def __init__(self, google_id=None, name=None, photo=None, email=None, password=None):
         self.google_id = google_id
@@ -20,6 +22,7 @@ class User(db.Model):
         self.photo = photo
         self.email = email
         self.password = password
+        self.face_embedding = face_embedding  # <-- New init field
 
     def to_dict(self):
         return {

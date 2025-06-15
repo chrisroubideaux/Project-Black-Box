@@ -4,13 +4,16 @@ from flask_migrate import Migrate
 from flask_cors import CORS  
 from dotenv import load_dotenv
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from admin.routes import admin_blueprint
 from user.routes import user_blueprint
 from videos.routes import video_blueprint 
+from videos.upload import upload_blueprint
 from user_likes.routes import user_likes_bp 
 from history.routes import history_blueprint 
 from extensions import db, bcrypt, login_manager
-from user.models import User  # ✅ Import User model
+from user.models import User
 
 # Load environment variables
 load_dotenv()
@@ -27,7 +30,7 @@ CORS(
     app,
     supports_credentials=True,
     origins=["http://localhost:3000"],
-    headers=["Content-Type", "x-access-token", "Authorization"]  # <-- Add x-access-token here
+    headers=["Content-Type", "x-access-token", "Authorization"] 
 )
 
 # Configurations
@@ -46,14 +49,22 @@ login_manager.session_protection = "strong"
 # ✅ Fix: Add user_loader function
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)  # ✅ Fetch user by UUID
+    return User.query.get(user_id)  
 
 # Register blueprints
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(video_blueprint, url_prefix='/videos')
+app.register_blueprint(upload_blueprint, url_prefix='/videos')
+
+
 app.register_blueprint(user_likes_bp, url_prefix='/user_likes')
 app.register_blueprint(history_blueprint, url_prefix='/history')
+
+with app.app_context():
+    print("\nRegistered routes:")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.endpoint:50s} {rule.methods} {rule}")
 
 
 @app.route('/')

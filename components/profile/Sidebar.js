@@ -65,32 +65,32 @@ const Sidebar = ({ users }) => {
             }
           }}
         >
-          <FaUser className="icon" />
+          <FaUser className="icon fs-6" />
           <span>Profile</span>
         </a>
         <Link href="/" className="nav-link sidebar-item">
-          <FaHome className="icon" />
+          <FaHome className="icon fs-5" />
           <span>Home</span>
         </Link>
         <Link href="#" className="nav-link sidebar-item">
-          <FaPlayCircle className="icon" />
+          <FaPlayCircle className="icon fs-5" />
           <span>Shorts</span>
         </Link>
         <Link href="#" className="nav-link sidebar-item">
-          <FaTv className="icon" />
+          <FaTv className="icon fs-5" />
           <span>Subs</span>
         </Link>
       </ul>
-      ;
+
       <hr className="w-100 border-light mt-auto" />
       {isLoggedIn ? (
         <Link href="#" className="nav-link sidebar-item" onClick={handleLogout}>
-          <FaSignOutAlt className="icon" />
+          <FaSignOutAlt className="icon fs-5" />
           <span>Log out</span>
         </Link>
       ) : (
         <Link href="/login" className="nav-link sidebar-item">
-          <FaSignInAlt className="icon" />
+          <FaSignInAlt className="icon fs-5" />
           <span>Login</span>
         </Link>
       )}
