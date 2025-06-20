@@ -1,4 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# === Uploaded Videos and Thumbnails ===
+backend/videos/videos/*.mp4
+backend/videos/videos/*.mov
+backend/videos/videos/*.avi
+
+backend/videos/videos/images/videos/*.jpg
+backend/videos/videos/images/videos/*.jpeg
+backend/videos/videos/images/videos/*.png
 
 # Ignore virtual environment
 venv/
