@@ -1,6 +1,6 @@
 // Cover component
 import { useEffect, useRef, useState } from 'react';
-import { FaGithub, FaInstagramSquare,FaYoutubeSquare  } from "react-icons/fa";
+import { FaInstagramSquare,FaYoutubeSquare, FaTiktok  } from "react-icons/fa";
 import Link from 'next/link';
 
 const Cover: React.FC = () => {
@@ -94,8 +94,8 @@ const Cover: React.FC = () => {
         }}
         className="glitch-container"
       >
-         <h1 className=" glitch sixtyfour typewriter text-center" data-text="Black Box">
-           Black Box
+         <h1 className=" glitch sixtyfour typewriter text-center" data-text="Projekt Black Box">
+           Projekt Black Box
         </h1>
         <Link
     href="/videos/"
@@ -123,7 +123,7 @@ const Cover: React.FC = () => {
                 target="_blank"
                 rel="noopener"
               >
-                Black Box
+                Project Black Box
               </Link>
             </p>
 
@@ -136,8 +136,10 @@ const Cover: React.FC = () => {
                 <FaYoutubeSquare className="social-icons mt-1" />  
               </Link>
 
-              <Link href="https://github.com/chrisroubideaux/Project-Black-Box" className="me-2">
-                <FaGithub className="social-icons mt-1" />
+             
+
+              <Link href="#!" className=" me-2">
+                <FaTiktok className="social-icons mt-1" />
               </Link>
             </div>
           </div>

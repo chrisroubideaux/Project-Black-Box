@@ -1,6 +1,12 @@
 // Navbar component
 import Image from 'next/image';
-import { FaSearch, FaBars, FaRegHandPeace, FaUser } from 'react-icons/fa';
+import {
+  FaSearch,
+  FaBars,
+  FaRegHandPeace,
+  FaUser,
+  FaMicrophone,
+} from 'react-icons/fa';
 import Link from 'next/link';
 
 import { FaGear, FaTv } from 'react-icons/fa6';
@@ -37,6 +43,11 @@ export const Navbar = () => {
                 placeholder="Search"
                 aria-label="Search"
               />
+            </div>
+            <div className="d-flex align-items-center ms-3">
+              <button className="  btn-md btn me-2">
+                <FaMicrophone className="fs-4" />
+              </button>
             </div>
           </div>
           <ul className="navbar-nav ms-auto ">

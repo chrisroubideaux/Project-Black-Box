@@ -1,7 +1,5 @@
 // Home page
 'use client';
-
-
 import Cover from '@/components/cover/Cover';
 
 export default function Home() {
