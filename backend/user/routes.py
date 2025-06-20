@@ -177,37 +177,37 @@ from flask import jsonify, request
 import jwt
 
 # face detection login
-@user_blueprint.route('/user/login-face', methods=['POST'])
-@cross_origin(origin="http://localhost:3000", supports_credentials=True)
-def login_face():
-    """Authenticate user using Face Detection (Mediapipe) and return a JWT token if face detected."""
-    data = request.get_json()
-    if 'image' not in data:
-        return jsonify({"success": False, "message": "No image provided"}), 400
+#@user_blueprint.route('/user/login-face', methods=['POST'])
+#@cross_origin(origin="http://localhost:3000", supports_credentials=True)
+#def login_face():
+#    """Authenticate user using Face Detection (Mediapipe) and return a JWT token if face detected."""
+#    data = request.get_json()
+#    if 'image' not in data:
+#        return jsonify({"success": False, "message": "No image provided"}), 400
 
     # Decode the image
-    image_data = data['image'].split(',')[1]
-    img_bytes = base64.b64decode(image_data)
-    nparr = np.frombuffer(img_bytes, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+#    image_data = data['image'].split(',')[1]
+#    img_bytes = base64.b64decode(image_data)
+#    nparr = np.frombuffer(img_bytes, np.uint8)
+#    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     # Convert to RGB for Mediapipe
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+#    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    with mp.solutions.face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
-        results = face_detection.process(img_rgb)
+#    with mp.solutions.face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
+#        results = face_detection.process(img_rgb)
 
-        if results.detections:
+#        if results.detections:
             # Face detected - issue JWT token (later can be customized per user)
-            token = jwt.encode(
-                {'face_detected': True},
-                SECRET_KEY,
-                algorithm="HS256"
-            )
-            return jsonify(success=True, token=token)
+#            token = jwt.encode(
+#                {'face_detected': True},
+#                SECRET_KEY,
+#                algorithm="HS256"
+#            )
+#            return jsonify(success=True, token=token)
 
-        else:
-            return jsonify(success=False, message="No face detected")
+#        else:
+#            return jsonify(success=False, message="No face detected")
 
 # Logout
 @user_blueprint.route('/user/logout', methods=['POST'])
