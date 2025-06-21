@@ -7,6 +7,8 @@ services:
     startCommand: gunicorn app:app
     rootDir: backend
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13  # ✅ Force Python 3.10
       - key: DB_USER
         value: postgres
       - key: DB_PASSWORD
