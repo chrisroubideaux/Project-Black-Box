@@ -3,8 +3,8 @@ import Navbar from '@/components/navbar/Navbar';
 import Tab from '@/components/profile/Tab';
 import Sidebar from '@/components/profile/Sidebar';
 import History from '@/components/video/history/History';
-import LikedVideos from '@/components/video/liked/LikedVideos';
-import SavedVideos from '@/components/video/saved/SavedVideos';
+//import LikedVideos from '@/components/video/liked/LikedVideos';
+//import SavedVideos from '@/components/video/saved/SavedVideos';
 
 export default function Profile() {
   return (
@@ -41,7 +41,9 @@ export default function Profile() {
                 </button>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
+                {/* Assuming LikedVideos component fetches and displays liked videos 
                 <LikedVideos />
+                */}
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Watch Later</h4>
@@ -50,7 +52,9 @@ export default function Profile() {
                 </button>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
+                {/* Assuming SavedVideos component fetches and displays saved videos *
                 <SavedVideos />
+                */}
               </div>
             </div>
           </div>
