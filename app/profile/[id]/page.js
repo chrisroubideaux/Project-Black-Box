@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
 import Navbar from '../components/navbar/Navbar';
-import Tab from '@/components/profile/tab';
+import Tab from '@/components/profile/Tab';
 import Sidebar from '../components/profile/Sidebar';
 //import History from '@/components/video/history/History';
 //import LikedVideos from '@/components/video/liked/LikedVideos';
