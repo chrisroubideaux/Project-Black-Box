@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
-import Navbar from '../components/navbar/navbar';
+import Navbar from '../components/navbar/Navbar';
 import Tab from '@/components/profile/tab';
 import Sidebar from '../components/profile/sidebar';
 import History from '@/components/video/history/History';
