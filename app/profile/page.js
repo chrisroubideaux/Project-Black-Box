@@ -42,9 +42,6 @@ export default function Profile() {
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
                 <LikedVideos />
-                <LikedVideos />
-                <LikedVideos />
-                <LikedVideos />
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="text-light">Watch Later</h4>
@@ -53,9 +50,6 @@ export default function Profile() {
                 </button>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                <SavedVideos />
-                <SavedVideos />
-                <SavedVideos />
                 <SavedVideos />
               </div>
             </div>
