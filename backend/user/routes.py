@@ -7,10 +7,9 @@ import jwt
 from extensions import db 
 from .models import User
 from dotenv import load_dotenv
-#import mediapipe as mp  # ✅ NEW
-import cv2
-import numpy as np
-import base64
+#import cv2
+#import numpy as np
+#import base64
 from datetime import datetime, timedelta
 from flask_cors import cross_origin
 
