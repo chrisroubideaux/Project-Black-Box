@@ -82,7 +82,7 @@ const Register = () => {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-          confirmPassword: formData.confirmPassword, // ✅ Include confirmPassword
+          confirmPassword: formData.confirmPassword,
           photo: formData.photo || '',
         }
       );
