@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/Nav/Navbar';
 import VideoPlayer from '@/components/Video/Feed/VideoPlayer';
 import Shorts from '@/components/Video/Shorts/Shorts';
 //import Watched from '@/components/video/history/Watched';

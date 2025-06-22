@@ -1,5 +1,5 @@
 // Profile page
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/Profile/Tab';
 import Sidebar from '@/components/Profile/Sidebar';
 import History from '@/components/Video/History/History';
