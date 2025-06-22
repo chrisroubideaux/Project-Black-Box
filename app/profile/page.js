@@ -1,4 +1,5 @@
 // Profile page
+'use client';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/Profile/Tab';
 import Sidebar from '@/components/Profile/Sidebar';
