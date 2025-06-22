@@ -3,12 +3,10 @@
 'use client';
 import Register from '@/components/Cover/Register';
 
-export const page = () => {
+export default function Page() {
   return (
     <div>
       <Register />
     </div>
   );
-};
-
-export default page;
+}
