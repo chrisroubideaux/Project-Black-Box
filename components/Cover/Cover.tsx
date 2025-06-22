@@ -94,9 +94,10 @@ const Cover: React.FC = () => {
         }}
         className="glitch-container"
       >
-         <h1 className=" glitch sixtyfour typewriter text-center" data-text="Projekt Black Box">
-           Projekt Black Box
+        <h1 className="glitch typewriter text-center michroma-text" data-text="Projekt Black Box">
+          Projekt Black Box
         </h1>
+
         <Link
     href="/videos/"
     className="image-link bg-transparent mt-3"
@@ -123,7 +124,7 @@ const Cover: React.FC = () => {
                 target="_blank"
                 rel="noopener"
               >
-                Project Black Box
+                Projekt Black Box
               </Link>
             </p>
 

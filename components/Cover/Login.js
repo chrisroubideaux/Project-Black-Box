@@ -351,7 +351,9 @@ const Login = () => {
               >
                 Register
               </Link>
-              <p className="mt-1 mb-3 text-light">&copy; Black Box, 2025</p>
+              <p className="mt-1 mb-3 text-light">
+                &copy; Projekt Black Box, 2025
+              </p>
             </form>
           </div>
         </div>

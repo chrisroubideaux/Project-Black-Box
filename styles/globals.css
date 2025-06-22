@@ -97,7 +97,7 @@ body {
 :root {
   --font-sixtyfour: "Sixtyfour", serif;
 }
-
+/*
 .sixtyfour {
   font-family: var(--font-sixtyfour);
   font-optical-sizing: auto;
@@ -107,6 +107,11 @@ body {
     "BLED" 0,
     "SCAN" 0;
 }
+*/
+.michroma-text {
+  font-family: var(--font-michroma), sans-serif;
+}
+
 
 /* Typewriter Effect */
 @keyframes typing {
