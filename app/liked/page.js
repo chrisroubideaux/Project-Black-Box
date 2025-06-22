@@ -1,5 +1,5 @@
 // Liked Videos page
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/Nav/Navbar';
 import LikedCard from '@/components/Video/Liked/LikedCard';
 import Tab from '@/components/Video/Liked/Tab';
 

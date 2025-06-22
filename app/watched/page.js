@@ -1,7 +1,7 @@
 // Watched page
-import Navbar from '@/components/navbar/Navbar';
-import WatchedCard from '@/components/Video/history/WatchedCard';
-import Tab from '@/components/Video/history/Tab';
+import Navbar from '@/components/Nav/Navbar';
+import WatchedCard from '@/components/Video/History/WatchedCard';
+import Tab from '@/components/Video/History/Tab';
 
 export default function Page() {
   return (
