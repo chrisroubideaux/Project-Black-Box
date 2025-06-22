@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
 import Link from 'next/link';
-import { Tooltip } from 'bootstrap';
 
 const Register = () => {
   const router = useRouter();
@@ -90,8 +89,8 @@ const Register = () => {
       if (response.status === 201) {
         const { token, user } = response.data;
 
-        console.log('Token received after registration:', token); // ✅ Debugging step
-        localStorage.setItem('authToken', token); // ✅ Ensure consistency
+        console.log('Token received after registration:', token);
+        localStorage.setItem('authToken', token);
 
         if (response.data.redirectTo) {
           router.push(response.data.redirectTo);
@@ -132,16 +131,21 @@ const Register = () => {
       'width=300,height=300'
     );
   };
-
+  // Initialize Bootstrap tooltips
   useEffect(() => {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    tooltipTriggerList.forEach((tooltipTriggerEl) => {
-      new Tooltip(tooltipTriggerEl);
-    });
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      import('bootstrap').then(({ Tooltip }) => {
+        const tooltipTriggerList = document.querySelectorAll(
+          '[data-bs-toggle="tooltip"]'
+        );
+        tooltipTriggerList.forEach((tooltipTriggerEl) => {
+          new Tooltip(tooltipTriggerEl);
+        });
+      });
+    }
   }, []);
 
+  // Handle canvas dimensions and static effect
   useEffect(() => {
     const handleResize = () => {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -155,6 +159,7 @@ const Register = () => {
     };
   }, []);
 
+  // Handle canvas drawing
   useEffect(() => {
     if (!dimensions) return;
 
