@@ -5,7 +5,7 @@ import Link from 'next/link';
 //import { FaCircle } from 'react-icons/fa';
 import axios from 'axios';
 
-export const History = ({ userId }) => {
+export const HistoryCard = ({ userId }) => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export const History = ({ userId }) => {
   );
 };
 
-export default History;
+export default HistoryCard;
 
 {
   /*
