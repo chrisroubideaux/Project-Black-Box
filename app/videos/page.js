@@ -7,7 +7,7 @@ import Sidebar from '@/components/Profile/Sidebar';
 import Tab from '@/components/Profile/Tab';
 import Cards from '@/components/Video/Feed/Cards';
 
-export const Page = () => {
+export default function Page() {
   const [videos, setVideos] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -66,9 +66,7 @@ export const Page = () => {
       </div>
     </>
   );
-};
-
-export default Page;
+}
 
 {
   /*
