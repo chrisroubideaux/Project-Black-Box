@@ -53,7 +53,7 @@ const Cover: React.FC = () => {
      
       <section
         style={{
-          backgroundImage: 'url(/images/cover.png)',
+          backgroundImage: 'url(/images/cover5.png)',
           height: '100%',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -94,7 +94,7 @@ const Cover: React.FC = () => {
         }}
         className="glitch-container"
       >
-        <h1 className="glitch typewriter text-center michroma-text" data-text="Projekt Black Box">
+        <h1 className=" typewriter text-center michroma-text" data-text="Projekt Black Box">
           Projekt Black Box
         </h1>
 

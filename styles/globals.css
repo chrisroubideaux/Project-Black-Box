@@ -169,6 +169,11 @@ body {
  height: 100%;
 }
 
+h1 {
+  font-size: 2.5rem;
+  color: #696868;
+}
+
 h4 {
   color: #9f9e9e;
 }
