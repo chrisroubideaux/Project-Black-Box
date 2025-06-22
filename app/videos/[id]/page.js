@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/Nav/Navbar';
-import VideoPlayer from '@/components/Video/Feed/VideoPlayer';
+//import VideoPlayer from '@/components/Video/Feed/VideoPlayer';
 import Shorts from '@/components/Video/Shorts/Shorts';
 //import Watched from '@/components/video/history/Watched';
 import Sidebar from '@/components/Profile/Sidebar';
@@ -52,9 +52,7 @@ export default function Page() {
             <div className="col">
               <Sidebar users={user} />
             </div>
-            <div className="col-8">
-              <VideoPlayer video={video} />
-            </div>
+            <div className="col-8">{/* <VideoPlayer video={video} /> */}</div>
             <div className="col">
               <div className="sticky-top pt-5">
                 <Shorts />
