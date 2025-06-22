@@ -1,6 +1,6 @@
 // Login page
 'use client';
-import Login from '../components/Cover/Login';
+import Login from '@/components/Cover/Login';
 
 export const page = () => {
   return (

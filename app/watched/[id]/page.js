@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
-import Navbar from '@/components/navbar/Navbar';
+import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/Video/history/Tab';
 import WatchedCard from '@/components/Video/history/WatchedCard';
 
