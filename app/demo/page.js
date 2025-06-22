@@ -1,11 +1,6 @@
 // Demo page
+'use client';
 
-export const page = () => {
-  return (
-    <div>
-      <h1>Test</h1>
-    </div>
-  );
-};
-
-export default page;
+export default function page() {
+  return <div>page</div>;
+}
