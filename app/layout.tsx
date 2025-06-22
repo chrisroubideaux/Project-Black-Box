@@ -11,7 +11,7 @@ import '@/styles/form.css';
 import '@/styles/login.css';
 //import  '@/styles/register.css';
 
-import BootstrapClient from "@/utils/BootstrapClient";
+import BootstrapClient from "../utils/BootstrapClient";
 
 const sixtyfourFont = Sixtyfour({
   variable: "--font-sixtyfour", 
@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${sixtyfourFont.variable}`}>
         {children}
-        <BootstrapClient /> 
+        <BootstrapClient />  
       </body>
     </html>
   );

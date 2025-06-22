@@ -1,7 +1,7 @@
 // Register page
 
 'use client';
-import Register from '@/components/cover/Register';
+import Register from '@/components/Cover/Register';
 
 export const page = () => {
   return (

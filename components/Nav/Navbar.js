@@ -8,7 +8,6 @@ import {
   FaMicrophone,
 } from 'react-icons/fa';
 import Link from 'next/link';
-
 import { FaGear, FaTv } from 'react-icons/fa6';
 
 export const Navbar = () => {

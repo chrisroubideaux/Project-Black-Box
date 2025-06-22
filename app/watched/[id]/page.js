@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
-import Tab from '@/components/video/history/Tab';
-import WatchedCard from '@/components/video/history/WatchedCard';
+import Tab from '@/components/Video/history/Tab';
+import WatchedCard from '@/components/Video/history/WatchedCard';
 
 export default function Page() {
   const { id } = useParams();

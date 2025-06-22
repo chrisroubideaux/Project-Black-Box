@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
-import VideoPlayer from '@/components/video/feed/VideoPlayer';
-import Shorts from '@/components/video/shorts/Shorts';
-import Watched from '@/components/video/history/Watched';
-import Sidebar from '@/components/profile/Sidebar';
+import VideoPlayer from '@/components/Video/feed/VideoPlayer';
+import Shorts from '@/components/Video/shorts/Shorts';
+import Watched from '@/components/Video/history/Watched';
+import Sidebar from '@/components/Profile/Sidebar';
 
 export default function Page() {
   const { id } = useParams();

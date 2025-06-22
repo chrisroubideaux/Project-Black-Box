@@ -1,7 +1,7 @@
 // Liked Videos page
-import Navbar from '@/components/navbar/Navbar';
-import LikedCard from '@/components/video/liked/LikedCard';
-import Tab from '@/components/video/liked/Tab';
+import Navbar from '@/components/Navbar/Navbar';
+import LikedCard from '@/components/Video/Liked/LikedCard';
+import Tab from '@/components/Video/Liked/Tab';
 
 export default function Page() {
   return (

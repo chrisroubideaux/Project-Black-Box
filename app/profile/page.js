@@ -1,8 +1,8 @@
 // Profile page
-import Navbar from '@/components/navbar/Navbar';
-import Tab from '@/components/profile/Tab';
-import Sidebar from '@/components/profile/Sidebar';
-import History from '@/components/video/history/History';
+import Navbar from '@/components/Navbar/Navbar';
+import Tab from '@/components/Profile/Tab';
+import Sidebar from '@/components/Profile/Sidebar';
+import History from '@/components/Video/History/History';
 //import LikedVideos from '@/components/video/liked/LikedVideos';
 //import SavedVideos from '@/components/video/saved/SavedVideos';
 

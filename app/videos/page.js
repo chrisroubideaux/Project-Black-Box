@@ -2,10 +2,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '@/components/navbar/Navbar';
-import Sidebar from '@/components/profile/Sidebar';
-import Tab from '@/components/profile/Tab';
-import Cards from '@/components/video/feed/Cards';
+import Navbar from '@/components/Nav/Navbar';
+import Sidebar from '@/components/Profile/Sidebar';
+import Tab from '@/components/Profile/Tab';
+import Cards from '@/components/Video/Feed/Cards';
 
 export const Page = () => {
   const [videos, setVideos] = useState([]);
