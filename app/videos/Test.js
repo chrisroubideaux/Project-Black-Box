@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Navbar from '@/components/navbar/Navbar';
-import VideoPlayer from '@/components/Video/feed/VideoPlayer';
-import Shorts from '@/components/Video/shorts/Shorts';
-import Watched from '@/components/Video/history/Watched';
+import VideoPlayer from '@/components/Video/Feed/VideoPlayer';
+import Shorts from '@/components/Video/Shorts/Shorts';
+import Watched from '@/components/Video/History/Watched';
 import Sidebar from '@/components/Profile/Sidebar';
 
 export default function Page() {
