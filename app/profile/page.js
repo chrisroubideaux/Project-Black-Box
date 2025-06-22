@@ -2,9 +2,6 @@
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/Profile/Tab';
 import Sidebar from '@/components/Profile/Sidebar';
-//import HistoryCard from '@/components/Video/History/HistoryCard';
-//import LikedVideos from '@/components/video/liked/LikedVideos';
-//import SavedVideos from '@/components/video/saved/SavedVideos';
 
 export default function Profile() {
   return (
@@ -29,30 +26,7 @@ export default function Profile() {
                 </button>
               </div>
               <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                {/* Assuming HistoryCard component fetches and displays history videos
-                <HistoryCard />
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <h4 className="text-light">Liked</h4>
-                <button className="btn btn-outline-light btn-sm">
-                  View All
-                </button>
-              </div>
-              <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-
-                <LikedVideos />
-                
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <h4 className="text-light">Watch Later</h4>
-                <button className="btn btn-outline-light btn-sm">
-                  View All
-                </button>
-              </div>
-              <div className="row row-cols-1 row-cols-sm-1 row-cols-lg-4 row-cols-xxl-3 py-5">
-                {/* Assuming SavedVideos component fetches and displays saved videos *
-                <SavedVideos />
-                */}
+                {/* History component can be added here */}
               </div>
             </div>
           </div>
