@@ -5,12 +5,13 @@ import axios from 'axios';
 import Navbar from '@/components/Nav/Navbar';
 import Sidebar from '@/components/Profile/Sidebar';
 import Tab from '@/components/Profile/Tab';
-import Cards from '@/components/Video/Feed/Cards';
+//import Cards from '@/components/Video/Feed/Cards';
 
 export default function Page() {
-  const [videos, setVideos] = useState([]);
+  // const [videos, setVideos] = useState([]);
   const [user, setUser] = useState(null);
-
+  {
+    /*
   useEffect(() => {
     axios
       .get('http://localhost:5000/videos/videos')
@@ -21,6 +22,8 @@ export default function Page() {
         console.error('Error fetching videos', error);
       });
   }, []);
+*/
+  }
 
   // Fetch user data (if logged in)
   useEffect(() => {
@@ -51,6 +54,7 @@ export default function Page() {
             {/* Video Feed - Takes Remaining Space */}
             <div className="col-lg-9 col-xxl-9">
               <div className="d-flex flex-wrap gap-3">
+                {/*
                 {videos.slice(0, 9).map((video, index) => (
                   <div
                     key={video.id || `video-${index}`}
@@ -59,6 +63,7 @@ export default function Page() {
                     <Cards videos={video} userId={user?.id} />
                   </div>
                 ))}
+                */}
               </div>
             </div>
           </div>
