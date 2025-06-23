@@ -94,28 +94,34 @@ const Cover: React.FC = () => {
         }}
         className="glitch-container"
       >
-        <h1 className=" typewriter text-center michroma-text" data-text="Projekt Black Box">
+       
+        <h1 className="fw-bold  text-center michroma-text fs-1 display-4 mt-5" data-text="Projekt Black Box">
           Projekt Black Box
-        </h1>
-
-        <Link
-    href="/videos/"
-    className="image-link bg-transparent mt-3"
-    style={{
-      backgroundImage: 'url(/images/cover2.png)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      height: '100px',
-      width: '100px',
-      display: 'inline-block',
-      border: 'none',
-      cursor: 'pointer',
-      textDecoration: 'none',
-    }}
-    aria-label="Navigate to Your Target Page"
-  ></Link>
+       </h1>
+       <Link
+          href="/videos/"
+          className="image-link bg-transparent"
+          style={{
+            backgroundImage: 'url(/images/cover2.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            marginTop: '60px',
+            height: '150px',
+            width: '150px',
+            display: 'inline-block',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'none',
+          }}
+            aria-label="Navigate to Your Target Page"
+          ></Link>
+ 
         <div className="w-100 align-center py-3 mt-5 pt-5">
+          <h4 className=" typewriter text-center michroma-text" data-text="Projekt Black Box">
+          Coming 2026
+        </h4>
+         
             <p className="nav d-block fs-xs text-center  pb-2 mb-0 text-white">
               &copy;2025, All rights reserved.
               <Link
@@ -132,13 +138,9 @@ const Cover: React.FC = () => {
               <Link href="#!" className=" me-2">
                 <FaInstagramSquare className="social-icons mt-1" />
               </Link>
-
               <Link href="#!" className=" me-2">
                 <FaYoutubeSquare className="social-icons mt-1" />  
               </Link>
-
-             
-
               <Link href="#!" className=" me-2">
                 <FaTiktok className="social-icons mt-1" />
               </Link>
