@@ -99,7 +99,7 @@ const Cover: React.FC = () => {
           Projekt Black Box
        </h1>
        <Link
-          href="/videos/"
+          href="/"
           className="image-link bg-transparent"
           style={{
             backgroundImage: 'url(/images/cover2.png)',
