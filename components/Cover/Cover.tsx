@@ -138,10 +138,10 @@ const Cover: React.FC = () => {
               <Link href="#!" className=" me-2">
                 <FaInstagramSquare className="social-icons mt-1" />
               </Link>
-              <Link href="#!" className=" me-2">
+              <Link href="https://www.youtube.com/channel/UCAwFh8O82kQ3NR13xWgSc7w/" className=" me-2">
                 <FaYoutubeSquare className="social-icons mt-1" />  
               </Link>
-              <Link href="#!" className=" me-2">
+              <Link href="https://www.tiktok.com/@projekt.black.box" className=" me-2">
                 <FaTiktok className="social-icons mt-1" />
               </Link>
             </div>
